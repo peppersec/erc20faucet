@@ -35,7 +35,7 @@ let networkConfig = {
       gasPrice: 1,
       currencyName: 'GöETH',
       explorerUrl: {
-        tx: 'https://blockscout.com/eth/goerli/tx'
+        tx: 'https://goerli.etherscan.io/tx'
       },
       networkName: 'Görli'
     },

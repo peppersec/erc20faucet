@@ -17,7 +17,7 @@ You will need some ethers (ETH) to pay for the network transaction fees. See [Te
 | Mainnet  | [0xfab46e002bbf0b4509813474841e0716e6730136](https://etherscan.io/token/0xfab46e002bbf0b4509813474841e0716e6730136)  |
 | Ropsten  | [0xfab46e002bbf0b4509813474841e0716e6730136](https://ropsten.etherscan.io/token/0xfab46e002bbf0b4509813474841e0716e6730136)  |
 | Rinkeby  | [0xfab46e002bbf0b4509813474841e0716e6730136](https://rinkeby.etherscan.io/token/0xfab46e002bbf0b4509813474841e0716e6730136)  |
-| Görli  | [0xba62bcfcaafc6622853cca2be6ac7d845bc0f2dc](https://blockscout.com/eth/goerli/address/0xba62bcfcaafc6622853cca2be6ac7d845bc0f2dc/transactions)  |
+| Görli  | [0xba62bcfcaafc6622853cca2be6ac7d845bc0f2dc](https://goerli.etherscan.io/address/0xba62bcfcaafc6622853cca2be6ac7d845bc0f2dc)  |
 | Kovan  | [0xfab46e002bbf0b4509813474841e0716e6730136](https://kovan.etherscan.io/token/0xfab46e002bbf0b4509813474841e0716e6730136)  |
 
 <br />
