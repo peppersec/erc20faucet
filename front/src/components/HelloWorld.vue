@@ -1,8 +1,8 @@
 <template>
   <v-container>
     Network: {{this.networkName}} <br/>
-    Balance: {{this.balance}} <br/>
-    Token Balance: {{this.tokenBalance}} <br/>
+    Balance: {{this.balance}} {{this.currency}} <br/>
+    Token Balance: {{this.tokenBalance}} FAU<br/>
     EthAcc: {{this.ethAccount}} <br/>
 
     <h1>Mint tokens to an address</h1>
@@ -42,7 +42,6 @@
           <v-list-tile
             v-for="(tx, index) in txs"
             :key="index"
-            @click=""
           >
             <v-list-tile-content>
                   <v-btn :href="makeUrl(tx)" target="_blank">{{makeUrl(tx)}}</v-btn>
@@ -63,7 +62,7 @@
     },
     computed: {
       ...mapState('metamask', [ 'balance', 'ethAccount', 'tokenBalance', 'txs']),
-      ...mapGetters('metamask', [ 'networkName' ]),
+      ...mapGetters('metamask', [ 'networkName', 'currency' ]),
     },
     methods: {
       ...mapActions('metamask', ['mintTokens']),

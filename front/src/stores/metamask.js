@@ -37,6 +37,9 @@ const getters = {
   networkName(state) {
     return networkConfig[`netId${state.netId}`].networkName
   },
+  currency(state) {
+    return networkConfig[`netId${state.netId}`].currencyName
+  },
   networkConfig(state) {
     return networkConfig[`netId${state.netId}`]
   }
