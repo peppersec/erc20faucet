@@ -1,4 +1,4 @@
-<hr />
+Deployed Dapp Url: [https://peppersec.github.io/erc20faucet/](https://peppersec.github.io/erc20faucet/)
 
 # ERC20 💪 Token Faucet
 
