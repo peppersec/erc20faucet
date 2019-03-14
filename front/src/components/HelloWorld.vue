@@ -4,6 +4,7 @@
     Balance: {{this.balance}} {{this.currency}} <br/>
     Token Balance: {{this.tokenBalance}} FAU<br/>
     EthAcc: {{this.ethAccount}} <br/>
+    Token Address: {{this.tokenInstance()._address}} <br/>
 
     <h1>Mint tokens to an address</h1>
     <br/>
@@ -61,7 +62,7 @@
       }
     },
     computed: {
-      ...mapState('metamask', [ 'balance', 'ethAccount', 'tokenBalance', 'txs']),
+      ...mapState('metamask', [ 'balance', 'ethAccount', 'tokenBalance', 'txs', 'tokenInstance']),
       ...mapGetters('metamask', [ 'networkName', 'currency' ]),
     },
     methods: {
