@@ -1,12 +1,12 @@
-Deployed Dapp Url: [https://peppersec.github.io/erc20faucet/](https://peppersec.github.io/erc20faucet/)
+![](https://raw.githubusercontent.com/peppersec/erc20faucet/master/ERC20%20Token%20Faucet.jpg)
 
-# ERC20 💪 Token Faucet
+# ERC20 Token Faucet
 
 An ERC20 token faucet on the Ethereum mainnet, and Ropsten, Kovan, Rinkeby and Görli testnets.
 
 <br />
 
-Send a 0 value transaction from your account to the token contract addresses below on your preferred network, and these token contracts will mint 1 ERC20 test tokens for your account.
+Visit [https://peppersec.github.io/erc20faucet/](https://peppersec.github.io/erc20faucet/) page, set appropriate token amount, click "Mint Free Tokens" button. That's it!
 
 You will need some ethers (ETH) to pay for the network transaction fees. See [Testnet Ether Faucets](#testnet-ether-faucets) below to obtain testnet ethers.
 
