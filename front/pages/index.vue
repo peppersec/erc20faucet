@@ -1,61 +1,119 @@
 <template>
-  <v-container>
-    Network: {{ networkName }} <br>
-    Balance: {{ balance }} {{ currency }} <br>
-    Token Balance: {{ tokenBalance }} FAU<br>
-    EthAcc: {{ ethAccount }} <br>
-    Token Address: {{ tokenAddress }} <br>
+  <div class="columns">
+    <div class="column is-two-thirds-tablet is-half-desktop">
+      <h1 class="title">
+        Ethereum ERC20 Token Faucet
+      </h1>
+      <h2 class="subtitle">
+        Mint tokens to an address
+      </h2>
 
-    <h1>Mint tokens to an address</h1>
-    <br>
+      <form @submit.prevent="validateBeforeSubmit">
+        <b-field
+          label="Address"
+          :type="{'is-danger': errors.has('address')}"
+          :message="errors.first('address')"
+          class="field-height"
+        >
+          <b-input
+            v-model="address"
+            v-validate="{ required: true, max: 42, valid_address: true }"
+            name="address"
+            placeholder="0x00000..."
+            maxlength="42"
+          />
+        </b-field>
 
-    <v-form
-      ref="form2"
-    >
-      <v-text-field
-        v-model="address"
-        :counter="42"
-        label="Address"
-        :rules="[
-          () => !!address || 'Required address',
-          () => isValidAddress || 'Address must be valid'
-        ]"
-        type="text"
-        required
-      />
+        <b-field
+          label="Amount"
+          :type="{'is-danger': errors.has('amount')}"
+          :message="errors.first('amount')"
+          class="field-height"
+        >
+          <b-input
+            v-model="amount"
+            v-validate="{ required: true, numeric: true, min_value: 1, max_value: 10000000 }"
+            type="number"
+            min="1"
+            max="10000000"
+            name="amount"
+            placeholder="1"
+          />
+        </b-field>
 
-      <v-text-field
-        v-model="amount"
-        label="Amount"
-        :rules="[
-          () => !!amount || 'Required amount',
-          () => !!amount && amount <= 10000000|| 'Must be less than 10 millions'
-        ]"
-        type="number"
-        required
-      />
+        <div class="level is-mobile">
+          <button
+            class="button is-primary"
+            type="submit"
+          >
+            Mint Free Tokens
+          </button>
+          <a href="https://peppersec.com" target="_blank" class="is-flex">
+            <span class="icon icon-madeby" />
+          </a>
+        </div>
+      </form>
 
-      <v-btn
-        color="success"
-        @click="mintTokens({ to: address, amount })"
-      >
-        Mint Free tokens
-      </v-btn>
-    </v-form>
-
-    <v-list>
-      <v-list-tile
-        v-for="(tx, index) in txs"
-        :key="index"
-      >
-        <v-list-tile-content>
-          <v-btn :href="makeUrl(tx)" target="_blank">
-            {{ makeUrl(tx) }}
-          </v-btn>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-list>
-  </v-container>
+      <div class="info columns is-multiline">
+        <div class="column">
+          <p class="heading">
+            Network
+          </p>
+          <p class="title">
+            {{ networkName }}
+          </p>
+        </div>
+        <div class="column">
+          <p class="heading">
+            Balance
+          </p>
+          <p class="title">
+            {{ balance }} {{ currency }}
+          </p>
+        </div>
+        <div class="column">
+          <p class="heading">
+            Token Balance
+          </p>
+          <p class="title">
+            {{ tokenBalance }} FAU
+          </p>
+        </div>
+        <div class="column is-12">
+          <p class="heading">
+            ETH Account
+          </p>
+          <p class="title">
+            {{ ethAccount }}
+          </p>
+        </div>
+        <div class="column is-12">
+          <p class="heading">
+            Token Address
+          </p>
+          <p class="title">
+            {{ tokenAddress }}
+          </p>
+        </div>
+        <div v-if="txs.length > 0" class="column is-12">
+          <p class="heading">
+            Sent transactions
+          </p>
+          <b-field class="explorer" grouped group-multiline>
+            <p
+              v-for="(tx, index) in txs"
+              :key="index"
+              class="control"
+            >
+              <a :href="makeUrl(tx)" target="_blank">
+                {{ makeUrl(tx) }}
+              </a>
+            </p>
+          </b-field>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -79,7 +137,7 @@ export default {
         this.$store.dispatch('metamask/setAddress', { address })
       }
     },
-    isValidAddress: {
+    isAddressValid: {
       get() {
         return this.$store.state.metamask.address.valid
       }
@@ -95,6 +153,20 @@ export default {
       }
     }
   },
+  watch: {
+    address(value) {
+      this.$validator.validate('address', value)
+    },
+    amount(value) {
+      this.$validator.validate('amount', value)
+    }
+  },
+  created() {
+    this.$validator.extend('valid_address', {
+      getMessage: field => `The ${field} must be valid.`,
+      validate: () => !!this.isAddressValid
+    })
+  },
   async mounted() {
     await this.$store.dispatch('metamask/askPermission')
   },
@@ -103,6 +175,24 @@ export default {
     makeUrl(txHash) {
       const config = this.$store.getters['metamask/networkConfig']
       return `${config.explorerUrl.tx}/${txHash}`
+    },
+    validateBeforeSubmit() {
+      this.$validator.validateAll().then(async (result) => {
+        if (result) {
+          await this.mintTokens({ to: this.address, amount: this.amount })
+          this.$toast.open({
+            message: 'Success',
+            type: 'is-success',
+            position: 'is-top'
+          })
+          return
+        }
+        this.$toast.open({
+          message: 'Please check the fields.',
+          type: 'is-danger',
+          position: 'is-top'
+        })
+      })
     }
   }
 }

@@ -15,8 +15,8 @@
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
     "nuxt": "^2.4.0",
-    "vuetify": "^1.5.5",
-    "vuetify-loader": "^1.2.1",
+    "nuxt-buefy": "^0.3.4",
+    "nuxt-validate": "^0.1.2",
     "web3": "1.0.0-beta.36"
   },
   "devDependencies": {
@@ -32,8 +32,8 @@
     "eslint-plugin-promise": ">=4.0.1",
     "eslint-plugin-standard": ">=4.0.0",
     "eslint-plugin-vue": "^5.2.2",
+    "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "sass-loader": "^7.1.0"
   }
 }

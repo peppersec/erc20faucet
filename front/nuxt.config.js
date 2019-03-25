@@ -1,5 +1,3 @@
-import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
-
 export default {
   mode: 'universal',
 
@@ -7,6 +5,9 @@ export default {
   ** Headers of the page
   */
   head: {
+    htmlAttrs: {
+      lang: 'en'
+    },
     title: 'ERC20 Token Faucet',
     meta: [
       { charset: 'utf-8' },
@@ -14,11 +15,13 @@ export default {
       { hid: 'description', name: 'description', content: 'An ERC20 token faucet on the Ethereum mainnet, and Ropsten, Kovan, Rinkeby and Görli testnets.' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'shortcut icon', type: 'image/x-icon', href: 'favicon.ico' },
+      { rel: 'icon', type: 'image/png', href: 'apple-touch-icon-180x180.png' },
+      { rel: 'apple-touch-icon', href: 'apple-touch-icon-180x180.png' },
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+          'https://fonts.googleapis.com/css?family=Montserrat:400,600,700'
       }
     ]
   },
@@ -32,33 +35,27 @@ export default {
   ** Global CSS
   */
   css: [
-    '~/assets/style/app.styl'
+    '@/assets/styles/styles.scss'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/vuetify'
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
+    ['nuxt-buefy', { css: false, materialDesignIcons: false }],
+    ['nuxt-validate', { events: '' }]
   ],
 
   /*
   ** Build configuration
   */
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl']
-      }
-    },
     /*
     ** You can extend webpack config here
     */
