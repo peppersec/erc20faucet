@@ -1,3 +1,9 @@
+const routerBase = process.env.NODE_ENV === 'dev' ? {} : {
+  router: {
+    base: '/erc20faucet/'
+  }
+}
+
 export default {
   mode: 'universal',
 
@@ -30,6 +36,8 @@ export default {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
+
+  ...routerBase,
 
   /*
   ** Global CSS
