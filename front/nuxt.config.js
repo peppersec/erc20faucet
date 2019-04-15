@@ -1,4 +1,4 @@
-const routerBase = process.env.NODE_ENV === 'dev' ? {} : {
+const routerBase = process.env.NODE_ENV === 'development' ? {} : {
   router: {
     base: '/erc20faucet/'
   }
