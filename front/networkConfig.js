@@ -63,6 +63,17 @@ const networkConfig = {
     },
     networkName: 'POA network',
     rpcUrl: 'https://core.poa.network'
+  },
+  netId77: {
+    verifyingContract: '0x3b6578d5a24e16010830bf6443bc9223d6b53480',
+    rpcCallRetryAttempt: 10,
+    gasPrice: 1,
+    currencyName: 'SPOA',
+    explorerUrl: {
+      tx: 'https://blockscout.com/poa/sokol/tx/'
+    },
+    networkName: 'Sokol network',
+    rpcUrl: 'https://sokol.poa.network'
   }
 }
 
