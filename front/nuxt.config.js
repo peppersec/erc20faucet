@@ -37,7 +37,10 @@ export default {
   */
   loading: { color: '#fff' },
 
-  ...routerBase,
+  // ...routerBase,
+  // router: {
+  //   base: '/erc20faucet/'
+  // },
 
   /*
   ** Global CSS

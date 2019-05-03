@@ -9,14 +9,16 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "deploy": "yarn generate && gh-pages -d dist -o origin"
+    "deploy": "echo erc20faucet.com > static/CNAME && yarn generate && gh-pages -d dist -o origin",
+    "deploy-prod": "echo erc20faucet.com > static/CNAME && nuxt generate && push-dir --remote origin --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
-    "nuxt": "^2.4.0",
+    "nuxt": "^2.6.3",
     "nuxt-buefy": "^0.3.4",
     "nuxt-validate": "^0.1.2",
+    "push-dir": "^0.4.1",
     "web3": "1.0.0-beta.36"
   },
   "devDependencies": {
