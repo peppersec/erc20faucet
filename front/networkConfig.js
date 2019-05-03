@@ -64,6 +64,17 @@ const networkConfig = {
     networkName: 'POA network',
     rpcUrl: 'https://core.poa.network'
   },
+  netId100: {
+    verifyingContract: '0x3111c94b9243a8a99d5a867e00609900e437e2c0',
+    rpcCallRetryAttempt: 10,
+    gasPrice: 1,
+    currencyName: 'xDai',
+    explorerUrl: {
+      tx: 'https://blockscout.com/poa/dai/tx/'
+    },
+    networkName: 'POA network',
+    rpcUrl: 'https://dai.poa.network'
+  },
   netId77: {
     verifyingContract: '0x3b6578d5a24e16010830bf6443bc9223d6b53480',
     rpcCallRetryAttempt: 10,
