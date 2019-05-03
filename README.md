@@ -6,7 +6,7 @@ An ERC20 token faucet on the Ethereum mainnet, and Ropsten, Kovan, Rinkeby and G
 
 <br />
 
-Visit [https://peppersec.github.io/erc20faucet/](https://peppersec.github.io/erc20faucet/) page, set appropriate token amount, click "Mint Free Tokens" button. That's it!
+Visit [https://erc20faucet.com/](https://erc20faucet.com/) page, set appropriate token amount, click "Mint Free Tokens" button. That's it!
 
 You will need some ethers (ETH) to pay for the network transaction fees. See [Testnet Ether Faucets](#testnet-ether-faucets) below to obtain testnet ethers.
 
@@ -19,6 +19,7 @@ You will need some ethers (ETH) to pay for the network transaction fees. See [Te
 | Rinkeby  | [0xfab46e002bbf0b4509813474841e0716e6730136](https://rinkeby.etherscan.io/token/0xfab46e002bbf0b4509813474841e0716e6730136)  |
 | Görli  | [0xba62bcfcaafc6622853cca2be6ac7d845bc0f2dc](https://goerli.etherscan.io/address/0xba62bcfcaafc6622853cca2be6ac7d845bc0f2dc)  |
 | Kovan  | [0xfab46e002bbf0b4509813474841e0716e6730136](https://kovan.etherscan.io/token/0xfab46e002bbf0b4509813474841e0716e6730136)  |
+| POA  | [0x8dc4f704a5fdf9f09ed561381bd02187201a83b8](https://blockscout.com/poa/core/tokens/0x8dc4f704a5fdf9f09ed561381bd02187201a83b8/token_transfers)  |
 
 <br />
 
