@@ -72,7 +72,7 @@ const networkConfig = {
     explorerUrl: {
       tx: 'https://blockscout.com/poa/dai/tx/'
     },
-    networkName: 'POA network',
+    networkName: 'xDai network',
     rpcUrl: 'https://dai.poa.network'
   },
   netId77: {
