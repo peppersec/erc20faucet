@@ -52,6 +52,17 @@ const networkConfig = {
     },
     networkName: 'Kovan',
     rpcUrl: 'https://kovan.infura.io'
+  },
+  netId99: {
+    verifyingContract: '0x8dc4f704a5fdf9f09ed561381bd02187201a83b8',
+    rpcCallRetryAttempt: 10,
+    gasPrice: 1,
+    currencyName: 'POA',
+    explorerUrl: {
+      tx: 'https://blockscout.com/poa/core/tx/'
+    },
+    networkName: 'POA network',
+    rpcUrl: 'https://core.poa.network'
   }
 }
 
