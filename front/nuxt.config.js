@@ -1,7 +1,15 @@
-const routerBase = process.env.NODE_ENV === 'development' ? {} : {
-  router: {
-    base: '/erc20faucet/'
-  }
+const modules = [
+  // Doc: https://buefy.github.io/#/documentation
+  ['nuxt-buefy', { css: false, materialDesignIcons: false }],
+  ['nuxt-validate', { events: '' }]
+]
+if (process.env.NODE_ENV !== 'development') {
+  modules.push([
+    '@nuxtjs/google-analytics',
+    {
+      id: 'UA-61981520-6'
+    }
+  ])
 }
 
 export default {
@@ -58,10 +66,7 @@ export default {
   /*
   ** Nuxt.js modules
   */
-  modules: [
-    ['nuxt-buefy', { css: false, materialDesignIcons: false }],
-    ['nuxt-validate', { events: '' }]
-  ],
+  ...modules,
 
   /*
   ** Build configuration
