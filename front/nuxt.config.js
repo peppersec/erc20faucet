@@ -1,5 +1,4 @@
 const modules = [
-  // Doc: https://buefy.github.io/#/documentation
   ['nuxt-buefy', { css: false, materialDesignIcons: false }],
   ['nuxt-validate', { events: '' }]
 ]
@@ -26,7 +25,45 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'An ERC20 token faucet on the Ethereum mainnet, and Ropsten, Kovan, Rinkeby and Görli testnets.' }
+      { hid: 'description', name: 'description', content: 'An ERC20 token faucet on the Ethereum mainnet, and Ropsten, Kovan, Rinkeby and Görli testnets.' },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'ERC20 Faucet Dapp Smart Contract'
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content:
+          'Get free ERC20 token on any Ethereum network'
+      },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: 'https://erc20faucet.app'
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'website'
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: 'https://erc20faucet.app/ERC20%20Token%20Faucet.jpg'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Get free ERC20 token on any Ethereum network'
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content:
+          'Airdrop, ERC20 Ethereum, free erc20, erc20 faucet, dapp, smart contract, decentralized, metamask'
+      }
     ],
     link: [
       { rel: 'shortcut icon', type: 'image/x-icon', href: 'favicon.ico' },
@@ -66,7 +103,7 @@ export default {
   /*
   ** Nuxt.js modules
   */
-  ...modules,
+  modules,
 
   /*
   ** Build configuration

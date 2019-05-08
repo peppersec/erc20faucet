@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/peppersec/erc20faucet/master/ERC20%20Token%20Faucet.jpg)
+![](https://raw.githubusercontent.com/peppersec/erc20faucet/master/front/static/ERC20%20Token%20Faucet.jpg)
 
 # ERC20 Token Faucet
 
