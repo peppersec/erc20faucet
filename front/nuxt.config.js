@@ -50,7 +50,7 @@ export default {
       {
         hid: 'og:image',
         property: 'og:image',
-        content: 'https://erc20faucet.app/ERC20%20Token%20Faucet.jpg'
+        content: 'https://erc20faucet.app/fb.png'
       },
       {
         hid: 'description',
