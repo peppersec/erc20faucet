@@ -40,7 +40,7 @@ export default {
       {
         hid: 'og:url',
         property: 'og:url',
-        content: 'https://erc20faucet.app'
+        content: 'https://erc20faucet.com'
       },
       {
         hid: 'og:type',
@@ -50,7 +50,7 @@ export default {
       {
         hid: 'og:image',
         property: 'og:image',
-        content: 'https://erc20faucet.app/fb.png'
+        content: 'https://erc20faucet.com/fb.png'
       },
       {
         hid: 'description',
