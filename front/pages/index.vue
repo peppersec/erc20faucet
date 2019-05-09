@@ -8,7 +8,7 @@
         Mint tokens to an address
       </h2>
 
-      <form @submit.prevent="validateBeforeSubmit">
+      <div>
         <b-field
           label="Address"
           :type="{'is-danger': errors.has('address')}"
@@ -44,7 +44,7 @@
         <div class="level is-mobile">
           <button
             class="button is-primary"
-            type="submit"
+            @click.prevent="validateBeforeSubmit"
           >
             Mint Free Tokens
           </button>
@@ -52,7 +52,7 @@
             <span class="icon icon-madeby" />
           </a>
         </div>
-      </form>
+      </div>
 
       <div class="info columns is-multiline">
         <div class="column">

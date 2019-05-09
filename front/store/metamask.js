@@ -146,6 +146,13 @@ const actions = {
   },
 
   sendAsync({ state, getters }, { method, from, params }) {
+    switch (getters.netId) {
+      case 77:
+      case 99:
+      case 100:
+        from = undefined
+        break
+    }
     return new Promise((resolve, reject) => {
       if (window.ethereum) {
         window.ethereum.sendAsync({
