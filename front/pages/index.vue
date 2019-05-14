@@ -84,7 +84,9 @@
             ETH Account
           </p>
           <p class="title">
-            {{ ethAccount }}
+            <a class="title" :href="addressUrl(ethAccount)" target="_blank">
+              {{ ethAccount }}
+            </a>
           </p>
         </div>
         <div class="column is-12">
@@ -92,7 +94,9 @@
             Token Address
           </p>
           <p class="title">
-            {{ tokenAddress }}
+            <a class="title" :href="addressUrl(tokenAddress)" target="_blank">
+              {{ tokenAddress }}
+            </a>
           </p>
         </div>
         <div v-if="txs.length > 0" class="column is-12">
@@ -168,13 +172,18 @@ export default {
     })
   },
   async mounted() {
+    this.$store.dispatch('metamask/fetchGasPrice', {})
     await this.$store.dispatch('metamask/askPermission')
   },
   methods: {
     ...mapActions('token', ['mintTokens']),
     makeUrl(txHash) {
       const config = this.$store.getters['metamask/networkConfig']
-      return `${config.explorerUrl.tx}/${txHash}`
+      return `${config.explorerUrl.tx}/tx/${txHash}`
+    },
+    addressUrl(address) {
+      const config = this.$store.getters['metamask/networkConfig']
+      return `${config.explorerUrl.tx}/address/${address}`
     },
     validateBeforeSubmit() {
       this.$validator.validateAll().then(async (result) => {

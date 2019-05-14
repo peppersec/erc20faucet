@@ -20,7 +20,8 @@ const state = () => {
     address: {
       value: null,
       valid: false
-    }
+    },
+    gasPrice: { fast: 1, low: 1, standard: 1 }
   }
 }
 
@@ -59,6 +60,9 @@ const mutations = {
       value: address,
       valid
     }
+  },
+  SAVE_GAS_PRICE(state, gasPrice) {
+    state.gasPrice = gasPrice
   }
 }
 
@@ -143,6 +147,45 @@ const actions = {
         reject(new Error('noMetamask'))
       }
     })
+  },
+
+  async fetchGasPrice({ rootState, commit, dispatch, rootGetters, state }, { oracleIndex = 0 }) {
+    // eslint-disable-next-line prettier/prettier
+    const { smartContractPollTime, gasPrice, gasOracleUrls } = rootGetters['metamask/networkConfig']
+    const { netId } = rootState.metamask
+    try {
+      if (netId === 1) {
+        const response = await fetch(gasOracleUrls[oracleIndex % gasOracleUrls.length])
+        if (response.status === 200) {
+          const json = await response.json()
+
+          const gasPrices = { ...gasPrice }
+          if (json.slow) {
+            gasPrices.low = Number(json.slow) + 0.5
+          }
+          if (json.safeLow) {
+            gasPrices.low = Number(json.safeLow) + 0.5
+          }
+          if (json.fast) {
+            gasPrices.fast = Number(json.fast)
+          }
+          if (json.standard) {
+            gasPrices.standard = Number(json.standard)
+          }
+          commit('SAVE_GAS_PRICE', gasPrices)
+        } else {
+          throw Error('Fetch gasPrice failed')
+        }
+        setTimeout(() => dispatch('fetchGasPrice', {}), 1000 * smartContractPollTime)
+      } else {
+        commit('SAVE_GAS_PRICE', gasPrice)
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+      oracleIndex++
+      setTimeout(() => dispatch('fetchGasPrice', { oracleIndex }), 1000 * smartContractPollTime)
+    }
   },
 
   sendAsync({ state, getters }, { method, from, params }) {

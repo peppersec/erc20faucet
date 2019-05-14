@@ -60,7 +60,7 @@ const actions = {
 
   async mintTokens({ state, getters, rootState, rootGetters, dispatch, commit }, { to, amount }) {
     amount = amount.toString()
-    const { gasPrice } = rootGetters['metamask/networkConfig']
+    const gasPrice = rootState.metamask.gasPrice.standard
     const { tokenInstance } = getters
     const { ethAccount } = rootState.metamask
     const data = tokenInstance().methods.mint(to, toWei(amount)).encodeABI()
