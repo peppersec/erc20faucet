@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "flatten": "truffle-flattener contracts/FaucetToken.sol > flatToken.sol"
+    "flatten": "truffle-flattener contracts/FaucetToken.sol > flatToken.sol",
+    "test": "mocha --timeout 100000 --file ./test/bootstrap.js --exit"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +13,12 @@
     "truffle": "^5.0.7"
   },
   "dependencies": {
+    "chai": "^4.2.0",
+    "dappeteer": "^0.6.0",
+    "mocha": "^6.1.4",
     "openzeppelin-solidity": "^2.2.0-rc.1",
-    "truffle-flattener": "^1.3.0"
+    "puppeteer": "^1.17.0",
+    "truffle-flattener": "^1.3.0",
+    "web3": "^1.0.0-beta.52"
   }
 }
