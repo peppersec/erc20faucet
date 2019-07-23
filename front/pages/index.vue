@@ -99,7 +99,7 @@
             </a>
           </p>
         </div>
-        <div v-if="txs.length > 0" class="column is-12">
+        <div v-show="txs.length > 0" class="column is-12">
           <p class="heading">
             Sent transactions
           </p>
