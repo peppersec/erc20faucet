@@ -15,6 +15,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "dappeteer": "^0.6.0",
+    "html-minifier": "^4.0.0",
     "mocha": "^6.1.4",
     "openzeppelin-solidity": "^2.2.0-rc.1",
     "puppeteer": "^1.17.0",
