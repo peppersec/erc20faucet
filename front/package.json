@@ -20,6 +20,7 @@
     "nuxt-buefy": "^0.3.4",
     "nuxt-validate": "^0.1.2",
     "push-dir": "^0.4.1",
+    "remove-html-comments": "^1.0.2",
     "web3": "1.0.0-beta.36"
   },
   "devDependencies": {
