@@ -2,7 +2,6 @@
   <div>
     <nav
       class="navbar header"
-      role="navigation"
       aria-label="main navigation"
     >
       <div class="container">

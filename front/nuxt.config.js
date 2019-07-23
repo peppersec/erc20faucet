@@ -112,6 +112,9 @@ export default {
     /*
     ** You can extend webpack config here
     */
+    html: {
+      collapseBooleanAttributes: false
+    },
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
