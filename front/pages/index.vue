@@ -171,9 +171,11 @@ export default {
       validate: () => !!this.isAddressValid
     })
   },
-  async mounted() {
-    this.$store.dispatch('metamask/fetchGasPrice', {})
-    await this.$store.dispatch('metamask/askPermission')
+  mounted() {
+    window.onload = async () => {
+      this.$store.dispatch('metamask/fetchGasPrice', {})
+      await this.$store.dispatch('metamask/askPermission')
+    }
   },
   methods: {
     ...mapActions('token', ['mintTokens']),
