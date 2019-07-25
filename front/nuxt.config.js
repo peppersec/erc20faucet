@@ -1,3 +1,8 @@
+/* eslint-disable no-console */
+const modifyHtml = (html) => {
+  return html.replace(/data-n-head=""|data-n-head="true"/g, '')
+}
+
 const modules = [
   ['nuxt-buefy', { css: false, materialDesignIcons: false }],
   ['nuxt-validate', { events: '' }]
@@ -13,10 +18,18 @@ if (process.env.NODE_ENV !== 'development') {
 
 export default {
   mode: 'universal',
-
+  render: { resourceHints: false },
   /*
   ** Headers of the page
   */
+  hooks: {
+    'generate:page': (page) => {
+      page.html = modifyHtml(page.html)
+    },
+    'render:route': (url, page, { req, res }) => {
+      page.html = modifyHtml(page.html)
+    }
+  },
   head: {
     htmlAttrs: {
       lang: 'en'
