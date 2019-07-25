@@ -31,7 +31,7 @@
         </div>
         <div class="copyright">
           <p>
-            Token Faucet v.1.07 {{ new Date().getFullYear() }}
+            Token Faucet v.1.08 {{ new Date().getFullYear() }}
           </p>
         </div>
         <div class="buttons social-buttons">
