@@ -77,7 +77,7 @@ const actions = {
   onNetworkChanged({ commit }, { netId }) {
     commit('SET_NET_ID', netId)
   },
-  getMyBalance({ dispatch, state, getters }) {
+  getBalance({ dispatch, state, getters }) {
     const { rpcCallRetryAttempt } = getters.networkConfig
     return new Promise((resolve, reject) => {
       const checkBalance = async ({ retryAttempt = 1 }) => {
@@ -114,27 +114,24 @@ const actions = {
           if (ethAccounts.length === 0) {
             reject(new Error('lockedMetamask'))
           }
+          const account = toChecksumAddress(ethAccounts[0])
+          commit('IDENTIFY', account)
+          dispatch('setAddress', { address: account })
+          let balance = await dispatch('getBalance')
+          balance = hexToNumberString(balance)
+          dispatch('saveUserBalance', { balance })
           const netId = await dispatch('sendAsync', {
             method: 'net_version',
             params: [],
             callbackAction: 'metamask/onNetworkChanged'
           })
-
           dispatch('onNetworkChanged', { netId })
-          const account = toChecksumAddress(ethAccounts[0])
-          commit('IDENTIFY', account)
-          dispatch('setAddress', { address: account })
           if (ethereum.on) {
             ethereum.on('accountsChanged', newAccount =>
               onAccountsChanged({ dispatch, commit, newAccount })
             )
-            ethereum.on('networkChanged', netId =>
-              dispatch('onNetworkChanged', { netId })
-            )
+            ethereum.on('networkChanged', netId => dispatch('onNetworkChanged', { netId }))
           }
-          let balance = await dispatch('getMyBalance')
-          balance = hexToNumberString(balance)
-          commit('SET_BALANCE', balance)
           dispatch('token/getTokenAddress', {}, { root: true })
           dispatch('token/getTokenBalance', {}, { root: true })
           resolve({ netId, ethAccount: ethAccounts[0] })
@@ -143,10 +140,13 @@ const actions = {
           reject(error)
         }
       } else {
-        // User doesnot have metamask
         reject(new Error('noMetamask'))
       }
     })
+  },
+
+  saveUserBalance({ commit }, { balance }) {
+    commit('SET_BALANCE', balance)
   },
 
   async fetchGasPrice({ rootState, commit, dispatch, rootGetters, state }, { oracleIndex = 0 }) {
