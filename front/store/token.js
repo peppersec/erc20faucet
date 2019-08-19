@@ -44,7 +44,7 @@ const actions = {
         from: ethAccount,
         to: tokenInstance()._address,
         data
-      }],
+      }, 'latest'],
       from: ethAccount
     }
     let balance = await dispatch('metamask/sendAsync', callParams, { root: true })
