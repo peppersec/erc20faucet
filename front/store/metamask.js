@@ -53,7 +53,7 @@ const getters = {
       //   await this.enableFortmaticTxProvider()
       //   break
       case 'squarelink':
-        const sqlk = new Squarelink('26af00dc0945d0d8898b', networkName)
+        const sqlk = new Squarelink('2b7f274f2a8972dfa320', networkName)
         const provider = await sqlk.getProvider()
         return provider
       // case 'wallet-connect':
