@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { fromWei, toHex, toWei, numberToHex, hexToNumberString } from 'web3-utils'
 import ABI from '@/abis/ERC20.abi.json'
 import networkConfig from '@/networkConfig'
@@ -47,6 +48,7 @@ const actions = {
       }, 'latest'],
       from: ethAccount
     }
+    console.log('getTokenBalance callParams', callParams)
     let balance = await dispatch('metamask/sendAsync', callParams, { root: true })
     balance = hexToNumberString(balance)
     commit('SET_TOKEN_BALANCE', balance)
@@ -65,6 +67,7 @@ const actions = {
     const { ethAccount } = rootState.metamask
     const data = tokenInstance.methods.mint(to, toWei(amount)).encodeABI()
     const gas = await tokenInstance.methods.mint(to, toWei(amount)).estimateGas()
+    console.log('gas mintTokens', gas)
     const callParams = {
       method: 'eth_sendTransaction',
       params: [{
@@ -77,6 +80,8 @@ const actions = {
       }],
       from: ethAccount
     }
+
+    console.log('mintTokens callParams', callParams)
     const txHash = await dispatch('metamask/sendAsync', callParams, { root: true })
     commit('ADD_TX', txHash)
   }

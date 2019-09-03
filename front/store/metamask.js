@@ -237,6 +237,7 @@ const actions = {
     }
     return new Promise(async (resolve, reject) => {
       const provider = await getters.getEthereumProvider()
+      console.log('sendAsync `method, from, params`', method, from, params)
       provider.sendAsync({
         method,
         params,
