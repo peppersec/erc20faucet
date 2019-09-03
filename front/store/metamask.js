@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import Web3 from 'web3'
 import Portis from '@portis/web3'
+import Squarelink from 'squarelink'
 import { toChecksumAddress, fromWei, isAddress, hexToNumberString } from 'web3-utils'
 import networkConfig from '@/networkConfig'
 
@@ -38,7 +39,7 @@ const getters = {
   networkConfig(state) {
     return networkConfig[`netId${state.netId}`]
   },
-  getEthereumProvider(state) {
+  getEthereumProvider: state => async () => {
     const { providerName, networkName } = state
     switch (providerName) {
       case 'portis':
@@ -51,9 +52,10 @@ const getters = {
       // case 'fortmatic':
       //   await this.enableFortmaticTxProvider()
       //   break
-      // case 'squarelink':
-      //   await this.enableSquarelinkTxProvider()
-      //   break
+      case 'squarelink':
+        const sqlk = new Squarelink('26af00dc0945d0d8898b')
+        const provider = await sqlk.getProvider()
+        return provider
       // case 'wallet-connect':
       //   await this.enableWalletConnectTxProvider()
       //   break
@@ -71,8 +73,9 @@ const getters = {
         return window.ethereum
     }
   },
-  web3: (state, getters) => () => {
-    return Object.freeze(new Web3(getters.getEthereumProvider))
+  web3: (state, getters) => async () => {
+    const provider = await getters.getEthereumProvider()
+    return Object.freeze(new Web3(provider))
   }
 }
 
@@ -147,7 +150,7 @@ const actions = {
     return new Promise(async (resolve, reject) => {
       commit('SET_PROVIDER_NAME', providerName)
       commit('SET_NETWORK_NAME', networkName)
-      const ethereum = getters.getEthereumProvider
+      const ethereum = await getters.getEthereumProvider()
       try {
         const ethAccounts = await ethereum.enable()
         if (ethAccounts.length === 0) {
@@ -232,8 +235,9 @@ const actions = {
         from = undefined
         break
     }
-    return new Promise((resolve, reject) => {
-      getters.getEthereumProvider.sendAsync({
+    return new Promise(async (resolve, reject) => {
+      const provider = await getters.getEthereumProvider()
+      provider.sendAsync({
         method,
         params,
         jsonrpc: '2.0',
