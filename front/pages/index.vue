@@ -48,6 +48,12 @@
           >
             Mint Free Tokens
           </button>
+          <button
+            class="button is-primary"
+            @click.prevent="onConnectWeb3"
+          >
+            Connect
+          </button>
           <a href="https://peppersec.com" target="_blank" class="is-flex">
             <span class="icon icon-madeby" />
           </a>
@@ -121,6 +127,7 @@
 </template>
 
 <script>
+import Modal from '@/components/Modal'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -172,9 +179,8 @@ export default {
     })
   },
   mounted() {
-    window.onload = async () => {
+    window.onload = () => {
       this.$store.dispatch('metamask/fetchGasPrice', {})
-      await this.$store.dispatch('metamask/askPermission')
     }
   },
   methods: {
@@ -186,6 +192,14 @@ export default {
     addressUrl(address) {
       const config = this.$store.getters['metamask/networkConfig']
       return `${config.explorerUrl.tx}/address/${address}`
+    },
+    onConnectWeb3() {
+      this.$modal.open({
+        parent: this,
+        component: Modal,
+        hasModalCard: true,
+        width: 440
+      })
     },
     validateBeforeSubmit() {
       this.$validator.validateAll().then(async (result) => {

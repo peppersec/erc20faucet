@@ -14,7 +14,7 @@ const getEthereumProvider = () => {
   } else if (window.portis) {
     return window.portis.provider
   } else {
-    window.portis = new Portis('ENTER_YOUR_DAPP_ID_HERE', 'mainnet')
+    window.portis = new Portis('97d5b405-f673-451c-a509-b70dc0ca2d40', 'mainnet')
     return window.portis.provider
   }
 }
