@@ -48,7 +48,7 @@ const networkConfig = {
     explorerUrl: {
       tx: 'https://goerli.etherscan.io'
     },
-    networkName: 'Görli',
+    networkName: 'Goerli',
     rpcUrl: 'https://goerli.infura.io/v3/c7463beadf2144e68646ff049917b716'
   },
   netId42: {
@@ -72,7 +72,7 @@ const networkConfig = {
     explorerUrl: {
       tx: 'https://blockscout.com/poa/core'
     },
-    networkName: 'POA network',
+    networkName: 'POA',
     rpcUrl: 'https://core.poa.network'
   },
   netId100: {
@@ -84,7 +84,7 @@ const networkConfig = {
     explorerUrl: {
       tx: 'https://blockscout.com/poa/dai'
     },
-    networkName: 'xDai network',
+    networkName: 'xDai',
     rpcUrl: 'https://dai.poa.network'
   },
   netId77: {
@@ -96,7 +96,7 @@ const networkConfig = {
     explorerUrl: {
       tx: 'https://blockscout.com/poa/sokol'
     },
-    networkName: 'Sokol network',
+    networkName: 'Sokol',
     rpcUrl: 'https://sokol.poa.network'
   }
 }

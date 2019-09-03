@@ -29,6 +29,15 @@ $link: #fff;
 $link-hover: $primary;
 $link-invert: $primary;
 
+$modal-card-title-color: $primary;
+$modal-card-head-background-color: #000403;
+$modal-card-head-border-bottom: none;
+$modal-card-foot-border-top: none;
+$modal-card-body-background-color: #000403;
+$modal-content-width: auto;
+$modal-card-body-padding: 0 20px 20px 20px;
+$radius-small: 4px;
+
 @import "~bulma/sass/base/_all";
 @import "~bulma/sass/elements/_all";
 @import "~bulma/sass/components/_all";
@@ -242,4 +251,108 @@ form {
       margin-bottom: 0;
     }
   }
+}
+
+.wallets {
+  .button {
+    width: 120px;
+    flex-direction: column;
+    height: auto;
+
+    &:before {
+      content: '';
+      height: 64px;
+      width: 64px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      margin: .25rem 0;
+    }
+
+    &.is-metamask:before {
+      background-image: url('../img/metamask-fox.svg');
+    }
+
+    &.is-portis:before {
+      background-image: url('../img/portis.svg');
+    }
+
+    &.is-squarelink:before {
+      background-image: url('../img/squarelink.svg');
+    }
+  }
+
+  .control-with-select {
+    .button {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-width: 0;
+
+      &:before {
+        height: 38px;
+      }
+    }
+
+    .select {
+      &.is-empty {
+        select {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+
+      select {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top-width: 0;
+        background-color: $dark;
+
+        &:hover {
+          background-color: #2f2f2f;
+        }
+
+        &:focus {
+          border-color: $dark;
+          box-shadow: none;
+        }
+      }
+
+      &:not(.is-multiple) {
+        height: auto;
+
+        &:not(.is-loading):hover::after {
+          border-color: $primary;
+        }
+      }
+    }
+  }
+
+  .network-select {
+    width: 120px;
+    overflow: hidden;
+  }
+
+  > .control:hover {
+    .button {
+      border-color: #fff;
+    }
+
+    &.control-with-select {
+      .button {
+        border-bottom-color: #363636;
+      }
+
+      .select select {
+        border-color: #fff;
+      }
+    }
+  }
+}
+
+.modal-card-title {
+  width: 100%;
+  text-align: center;
+}
+
+.fields:not(:last-child) {
+  margin-bottom: 1.5rem;
 }
