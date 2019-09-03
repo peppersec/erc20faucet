@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Web3 from 'web3'
 import Portis from '@portis/web3'
 import { toChecksumAddress, fromWei, isAddress, hexToNumberString } from 'web3-utils'
@@ -6,21 +7,6 @@ import networkConfig from '@/networkConfig'
 const onAccountsChanged = ({ newAccount, commit }) => {
   const account = toChecksumAddress(newAccount[0])
   commit('IDENTIFY', account)
-}
-
-const getEthereumProvider = () => {
-  if (window.ethereum) {
-    return window.ethereum
-  } else if (window.portis) {
-    return window.portis.provider
-  } else {
-    window.portis = new Portis('97d5b405-f673-451c-a509-b70dc0ca2d40', 'mainnet')
-    return window.portis.provider
-  }
-}
-
-const web3Instance = () => {
-  return Object.freeze(new Web3(getEthereumProvider()))
 }
 
 const state = () => {
@@ -33,7 +19,9 @@ const state = () => {
       value: null,
       valid: false
     },
-    gasPrice: { fast: 1, low: 1, standard: 1 }
+    gasPrice: { fast: 1, low: 1, standard: 1 },
+    providerName: '',
+    networkName: ''
   }
 }
 
@@ -50,8 +38,41 @@ const getters = {
   networkConfig(state) {
     return networkConfig[`netId${state.netId}`]
   },
-  web3: () => () => {
-    return web3Instance()
+  getEthereumProvider(state) {
+    const { providerName, networkName } = state
+    switch (providerName) {
+      case 'portis':
+        if (window.portis) {
+          return window.portis.provider
+        } else {
+          window.portis = new Portis('97d5b405-f673-451c-a509-b70dc0ca2d40', networkName)
+          return window.portis.provider
+        }
+      // case 'fortmatic':
+      //   await this.enableFortmaticTxProvider()
+      //   break
+      // case 'squarelink':
+      //   await this.enableSquarelinkTxProvider()
+      //   break
+      // case 'wallet-connect':
+      //   await this.enableWalletConnectTxProvider()
+      //   break
+      // case 'torus':
+      //   await this.enableTorusTxProvider()
+      //   break
+      // case 'bitski':
+      //   await this.enableBitskiTxProvider()
+      //   break
+      // case 'ledger':
+      //   await this.enableLedgerTxProvider()
+      //   break
+      case 'metamask':
+      default:
+        return window.ethereum
+    }
+  },
+  web3: (state, getters) => () => {
+    return Object.freeze(new Web3(getters.getEthereumProvider))
   }
 }
 
@@ -74,6 +95,12 @@ const mutations = {
   },
   SAVE_GAS_PRICE(state, gasPrice) {
     state.gasPrice = gasPrice
+  },
+  SET_PROVIDER_NAME(state, providerName) {
+    state.providerName = providerName
+  },
+  SET_NETWORK_NAME(state, networkName) {
+    state.networkName = networkName
   }
 }
 
@@ -116,9 +143,11 @@ const actions = {
       checkBalance({})
     })
   },
-  askPermission({ commit, dispatch }) {
+  askPermission({ commit, dispatch, getters }, { providerName, networkName }) {
     return new Promise(async (resolve, reject) => {
-      const ethereum = getEthereumProvider()
+      commit('SET_PROVIDER_NAME', providerName)
+      commit('SET_NETWORK_NAME', networkName)
+      const ethereum = getters.getEthereumProvider
       try {
         const ethAccounts = await ethereum.enable()
         if (ethAccounts.length === 0) {
@@ -204,7 +233,7 @@ const actions = {
         break
     }
     return new Promise((resolve, reject) => {
-      getEthereumProvider().sendAsync({
+      getters.getEthereumProvider.sendAsync({
         method,
         params,
         jsonrpc: '2.0',
