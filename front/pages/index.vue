@@ -43,12 +43,14 @@
 
         <div class="level is-mobile">
           <button
+            v-if="ethAccount"
             class="button is-primary"
             @click.prevent="validateBeforeSubmit"
           >
             Mint Free Tokens
           </button>
           <button
+            v-else
             class="button is-primary"
             @click.prevent="onConnectWeb3"
           >
@@ -60,7 +62,7 @@
         </div>
       </div>
 
-      <div class="info columns is-multiline">
+      <div v-if="ethAccount" class="info columns is-multiline">
         <div class="column">
           <p class="heading">
             Network
