@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import Web3 from 'web3'
 import Portis from '@portis/web3'
-import Squarelink from 'squarelink'
+import Squarelink from '@/node_modules/squarelink'
 import { toChecksumAddress, fromWei, isAddress, hexToNumberString } from 'web3-utils'
 import networkConfig from '@/networkConfig'
 
@@ -53,7 +53,7 @@ const getters = {
       //   await this.enableFortmaticTxProvider()
       //   break
       case 'squarelink':
-        const sqlk = new Squarelink('26af00dc0945d0d8898b')
+        const sqlk = new Squarelink('26af00dc0945d0d8898b', networkName)
         const provider = await sqlk.getProvider()
         return provider
       // case 'wallet-connect':
