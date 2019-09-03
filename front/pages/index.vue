@@ -8,7 +8,7 @@
         Mint tokens to an address
       </h2>
 
-      <div>
+      <div class="fields">
         <b-field
           label="Address"
           :type="{'is-danger': errors.has('address')}"
