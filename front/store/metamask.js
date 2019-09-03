@@ -1,4 +1,5 @@
 import Web3 from 'web3'
+import Portis from '@portis/web3'
 import { toChecksumAddress, fromWei, isAddress, hexToNumberString } from 'web3-utils'
 import networkConfig from '@/networkConfig'
 
@@ -7,8 +8,19 @@ const onAccountsChanged = ({ newAccount, commit }) => {
   commit('IDENTIFY', account)
 }
 
-const web3Instance = (rpcUrl) => {
-  return Object.freeze(new Web3(rpcUrl))
+const getEthereumProvider = () => {
+  if (window.ethereum) {
+    return window.ethereum
+  } else if (window.portis) {
+    return window.portis.provider
+  } else {
+    window.portis = new Portis('ENTER_YOUR_DAPP_ID_HERE', 'mainnet')
+    return window.portis.provider
+  }
+}
+
+const web3Instance = () => {
+  return Object.freeze(new Web3(getEthereumProvider()))
 }
 
 const state = () => {
@@ -38,9 +50,8 @@ const getters = {
   networkConfig(state) {
     return networkConfig[`netId${state.netId}`]
   },
-  web3: (state, getters) => () => {
-    const { rpcUrl } = getters.networkConfig
-    return web3Instance(rpcUrl)
+  web3: () => () => {
+    return web3Instance()
   }
 }
 
@@ -107,40 +118,36 @@ const actions = {
   },
   askPermission({ commit, dispatch }) {
     return new Promise(async (resolve, reject) => {
-      if (window.ethereum) {
-        const ethereum = window.ethereum
-        try {
-          const ethAccounts = await ethereum.enable()
-          if (ethAccounts.length === 0) {
-            reject(new Error('lockedMetamask'))
-          }
-          const account = toChecksumAddress(ethAccounts[0])
-          commit('IDENTIFY', account)
-          dispatch('setAddress', { address: account })
-          let balance = await dispatch('getBalance')
-          balance = hexToNumberString(balance)
-          dispatch('saveUserBalance', { balance })
-          const netId = await dispatch('sendAsync', {
-            method: 'net_version',
-            params: [],
-            callbackAction: 'metamask/onNetworkChanged'
-          })
-          dispatch('onNetworkChanged', { netId })
-          if (ethereum.on) {
-            ethereum.on('accountsChanged', newAccount =>
-              onAccountsChanged({ dispatch, commit, newAccount })
-            )
-            ethereum.on('networkChanged', netId => dispatch('onNetworkChanged', { netId }))
-          }
-          dispatch('token/getTokenAddress', {}, { root: true })
-          dispatch('token/getTokenBalance', {}, { root: true })
-          resolve({ netId, ethAccount: ethAccounts[0] })
-        } catch (error) {
-          // User rejects approval from metamask
-          reject(error)
+      const ethereum = getEthereumProvider()
+      try {
+        const ethAccounts = await ethereum.enable()
+        if (ethAccounts.length === 0) {
+          reject(new Error('lockedMetamask'))
         }
-      } else {
-        reject(new Error('noMetamask'))
+        const account = toChecksumAddress(ethAccounts[0])
+        commit('IDENTIFY', account)
+        dispatch('setAddress', { address: account })
+        let balance = await dispatch('getBalance')
+        balance = hexToNumberString(balance)
+        dispatch('saveUserBalance', { balance })
+        const netId = await dispatch('sendAsync', {
+          method: 'net_version',
+          params: [],
+          callbackAction: 'metamask/onNetworkChanged'
+        })
+        dispatch('onNetworkChanged', { netId })
+        if (ethereum.on) {
+          ethereum.on('accountsChanged', newAccount =>
+            onAccountsChanged({ dispatch, commit, newAccount })
+          )
+          ethereum.on('networkChanged', netId => dispatch('onNetworkChanged', { netId }))
+        }
+        dispatch('token/getTokenAddress', {}, { root: true })
+        dispatch('token/getTokenBalance', {}, { root: true })
+        resolve({ netId, ethAccount: ethAccounts[0] })
+      } catch (error) {
+        // User rejects approval from metamask
+        reject(error)
       }
     })
   },
@@ -197,25 +204,21 @@ const actions = {
         break
     }
     return new Promise((resolve, reject) => {
-      if (window.ethereum) {
-        window.ethereum.sendAsync({
-          method,
-          params,
-          jsonrpc: '2.0',
-          from
-        }, (err, response) => {
-          if (err) {
-            reject(err)
-          }
-          if (response.error) {
-            reject(response.error)
-          } else {
-            resolve(response.result)
-          }
-        })
-      } else {
-        reject(new Error('noMetamask'))
-      }
+      getEthereumProvider().sendAsync({
+        method,
+        params,
+        jsonrpc: '2.0',
+        from
+      }, (err, response) => {
+        if (err) {
+          reject(err)
+        }
+        if (response.error) {
+          reject(response.error)
+        } else {
+          resolve(response.result)
+        }
+      })
     })
   }
 }
