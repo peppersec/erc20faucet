@@ -46,7 +46,7 @@ const getters = {
         if (window.portis) {
           return window.portis.provider
         } else {
-          window.portis = new Portis('97d5b405-f673-451c-a509-b70dc0ca2d40', networkName)
+          window.portis = new Portis('f21d6ef4-efe2-4005-a7b2-817b7d6332a4', networkName)
           return window.portis.provider
         }
       // case 'fortmatic':
