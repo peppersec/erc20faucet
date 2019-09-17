@@ -87,7 +87,10 @@ export default {
         href:
           'https://fonts.googleapis.com/css?family=Montserrat:400,600,700'
       }
-    ]
+    ],
+    script: [{
+      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', async: ''
+    }]
   },
 
   /*
@@ -111,6 +114,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/ads.js', ssr: false }
   ],
 
   /*
