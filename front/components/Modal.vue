@@ -20,7 +20,7 @@
         </div>
         <div class="control control-with-select">
           <button class="button is-small is-dark is-squarelink" @click="_web3Connect('squarelink', squarelinkNetwork)">
-            SquareLink
+            Squarelink
           </button>
           <NetworkSelect v-model="squarelinkNetwork" />
         </div>
