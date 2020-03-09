@@ -19,6 +19,12 @@
           <NetworkSelect v-model="portisNetwork" />
         </div>
         <div class="control control-with-select">
+          <button class="button is-small is-dark is-authereum" @click="_web3Connect('authereum', authereumNetwork)">
+            Authereum
+          </button>
+          <NetworkSelect v-model="authereumNetwork" />
+        </div>
+        <div class="control control-with-select">
           <button class="button is-small is-dark is-squarelink" @click="_web3Connect('squarelink', squarelinkNetwork)">
             Squarelink
           </button>
@@ -52,7 +58,8 @@ export default {
       loading: false,
       message: 'Loading...',
       portisNetwork: 'mainnet',
-      squarelinkNetwork: 'mainnet'
+      squarelinkNetwork: 'mainnet',
+      authereumNetwork: 'mainnet'
     }
   },
   computed: {

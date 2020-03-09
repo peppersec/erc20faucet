@@ -45,6 +45,7 @@
           <button
             v-if="ethAccount"
             class="button is-primary"
+            :disabled="clicked"
             @click.prevent="validateBeforeSubmit"
           >
             Mint Free Tokens
@@ -135,7 +136,8 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
   data() {
     return {
-      amount: '1'
+      amount: '1',
+      clicked: false
     }
   },
   computed: {
@@ -204,6 +206,7 @@ export default {
       })
     },
     validateBeforeSubmit() {
+      this.clicked = true
       this.$validator.validateAll().then(async (result) => {
         if (result) {
           await this.mintTokens({ to: this.address, amount: this.amount })
@@ -212,6 +215,7 @@ export default {
             type: 'is-success',
             position: 'is-top'
           })
+          this.clicked = false
           return
         }
         this.$toast.open({
@@ -219,6 +223,7 @@ export default {
           type: 'is-danger',
           position: 'is-top'
         })
+        this.clicked = false
       })
     }
   }

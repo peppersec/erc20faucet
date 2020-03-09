@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxtjs/google-analytics": "^2.2.0",
     "@portis/web3": "^2.0.0-beta.38",
+    "authereum": "^0.0.4-beta.110",
     "cross-env": "^5.2.0",
     "gh-pages": "^2.0.1",
     "gulp": "^4.0.2",

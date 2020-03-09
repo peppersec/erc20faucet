@@ -4,6 +4,10 @@ import Portis from '@portis/web3'
 import Squarelink from '@/node_modules/squarelink'
 import { toChecksumAddress, fromWei, isAddress, hexToNumberString } from 'web3-utils'
 import networkConfig from '@/networkConfig'
+let Authereum
+if (process.client) {
+  Authereum = require('authereum').Authereum
+}
 
 const onAccountsChanged = ({ newAccount, commit }) => {
   const account = toChecksumAddress(newAccount[0])
@@ -49,9 +53,9 @@ const getters = {
           window.portis = new Portis('f21d6ef4-efe2-4005-a7b2-817b7d6332a4', networkName)
           return window.portis.provider
         }
-      // case 'fortmatic':
-      //   await this.enableFortmaticTxProvider()
-      //   break
+      case 'authereum':
+        const authereum = new Authereum(networkName)
+        return authereum.getProvider()
       case 'squarelink':
         const sqlk = new Squarelink('2b7f274f2a8972dfa320', networkName)
         const provider = await sqlk.getProvider()
@@ -163,7 +167,7 @@ const actions = {
         balance = hexToNumberString(balance)
         dispatch('saveUserBalance', { balance })
         const netId = await dispatch('sendAsync', {
-          method: 'eth_chainId',
+          method: 'net_version',
           params: [],
           callbackAction: 'metamask/onNetworkChanged'
         })
