@@ -163,7 +163,7 @@ const actions = {
         balance = hexToNumberString(balance)
         dispatch('saveUserBalance', { balance })
         const netId = await dispatch('sendAsync', {
-          method: 'net_version',
+          method: 'eth_chainId',
           params: [],
           callbackAction: 'metamask/onNetworkChanged'
         })
