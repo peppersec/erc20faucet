@@ -6,11 +6,11 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
+    "generate": "nuxt generate && gulp",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "deploy": "echo erc20faucet.com > static/CNAME && yarn generate && gh-pages -d dist -o origin",
-    "deploy-prod": "echo erc20faucet.com > static/CNAME && nuxt generate && gulp && push-dir --remote origin --dir=dist --branch=gh-pages --cleanup"
+    "deploy-prod": "echo erc20faucet.com > static/CNAME && nuxt generate && push-dir --remote origin --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "@nuxtjs/google-analytics": "^2.2.0",
