@@ -7,14 +7,10 @@
       <div class="container">
         <div class="navbar-brand">
           <a
-            class="navbar-item"
+            class="navbar-item text-hide"
             href="/"
           >
-            <img
-              src="~assets/img/logo.svg"
-              alt="ERC20 Token Faucet"
-              height="40"
-            >
+            ERC20 Token Faucet
           </a>
         </div>
       </div>
@@ -26,8 +22,8 @@
     </section>
     <footer class="footer">
       <div class="container">
-        <div class="footer-brand">
-          <img src="~assets/img/logo.svg" height="28" alt="">
+        <div class="footer-brand text-hide">
+          ERC20 Token Faucet
         </div>
         <div class="copyright">
           <p>

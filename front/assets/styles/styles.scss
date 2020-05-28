@@ -78,6 +78,10 @@ $radius-small: 4px;
 
       .navbar-item {
         padding: 0;
+
+        background-image: url('../img/logo.svg');
+        height: 2.5rem;
+        width: 9.75rem;
       }
     }
   }
@@ -112,8 +116,11 @@ a:focus {
       flex-direction: column;
     }
 
-    .footer-brand img {
-      max-height: 1.75rem;
+    .footer-brand {
+      background-size: contain;
+      background-image: url('../img/logo.svg');
+      width: 6.813rem;
+      height: 1.75rem;
 
       @include mobile {
         margin-bottom: .5rem;
@@ -359,4 +366,12 @@ form {
 
 .fields:not(:last-child) {
   margin-bottom: 1.5rem;
+}
+
+.text-hide {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
 }
