@@ -7,7 +7,7 @@
       <div class="container">
         <div class="navbar-brand">
           <a
-            class="navbar-item text-hide"
+            class="navbar-item text-hide logo"
             href="/"
           >
             ERC20 Token Faucet
@@ -22,7 +22,7 @@
     </section>
     <footer class="footer">
       <div class="container">
-        <div class="footer-brand text-hide">
+        <div class="footer-brand text-hide logo">
           ERC20 Token Faucet
         </div>
         <div class="copyright">
