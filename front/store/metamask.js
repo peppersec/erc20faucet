@@ -241,7 +241,18 @@ const actions = {
     }
     return new Promise(async (resolve, reject) => {
       const provider = await getters.getEthereumProvider()
+      if (from) {
+        from = toChecksumAddress(from)
+      }
+      console.log('from!!!', from, provider.selectedAddress)
       console.log('sendAsync `method, from, params`', method, from, params)
+      if (provider.request) {
+        if (params[0]) {
+          if (params[0].from) {
+            params[0].from = params[0].from.toLowerCase()
+          }
+        }
+      }
       provider.sendAsync({
         method,
         params,
