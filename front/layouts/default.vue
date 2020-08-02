@@ -25,11 +25,7 @@
         <div class="footer-brand text-hide logo">
           ERC20 Token Faucet
         </div>
-        <div class="copyright">
-          <p>
-            Token Faucet v.1.10 {{ new Date().getFullYear() }}
-          </p>
-        </div>
+        <Partners />
         <div class="buttons social-buttons">
           <a href="https://twitter.com/PeppersecCOM" target="_blank" class="button">
             <span class="icon icon-twitter" />
@@ -45,3 +41,13 @@
     </footer>
   </div>
 </template>
+
+<script>
+import Partners from '@/components/Partners'
+
+export default {
+  components: {
+    Partners
+  }
+}
+</script>

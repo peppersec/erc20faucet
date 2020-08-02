@@ -17,7 +17,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   render: { resourceHints: false },
   /*
   ** Headers of the page
