@@ -106,7 +106,7 @@ const networkConfig = {
     explorerUrl: {
       tx: 'https://bscscan.com'
     },
-    networkName: 'Mainnet',
+    networkName: 'BNB Smart Chain',
     rpcUrl: 'https://bsc-dataseed1.binance.org',
     gasPrice: { fast: 20, low: 20, standard: 20 },
     smartContractPollTime: 15
