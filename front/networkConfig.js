@@ -98,6 +98,18 @@ const networkConfig = {
     },
     networkName: 'Sokol',
     rpcUrl: 'https://sokol.poa.network'
+  },
+  netId56: {
+    verifyingContract: '0x5CD5Bb3EC13CE31771b63632Ddc2EB36E300b96C',
+    rpcCallRetryAttempt: 10,
+    currencyName: 'BNB',
+    explorerUrl: {
+      tx: 'https://bscscan.com'
+    },
+    networkName: 'Mainnet',
+    rpcUrl: 'https://bsc-dataseed1.binance.org',
+    gasPrice: { fast: 20, low: 20, standard: 20 },
+    smartContractPollTime: 15
   }
 }
 
