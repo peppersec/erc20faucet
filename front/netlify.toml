@@ -1,6 +1,6 @@
-[[redirects]]
-  from = "/*"
-  to = "/451"
-  status = 451
-  force = true
-  conditions = {Country=["RU", "BY","CU","IR","IQ","CI","LR","KP","SD","SY","ZW"]}
+# [[redirects]]
+#   from = "/*"
+#   to = "/451"
+#   status = 451
+#   force = true
+#   conditions = {Country=["RU", "BY","CU","IR","IQ","CI","LR","KP","SD","SY","ZW"]}
