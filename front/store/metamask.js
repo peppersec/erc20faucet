@@ -2,6 +2,7 @@
 import Web3 from 'web3'
 import Portis from '@portis/web3'
 import Squarelink from '@/node_modules/squarelink'
+import MewConnect from '@myetherwallet/mewconnect-web-client'
 import { toChecksumAddress, fromWei, isAddress, hexToNumberString } from 'web3-utils'
 import networkConfig from '@/networkConfig'
 let Authereum
@@ -60,6 +61,21 @@ const getters = {
         const sqlk = new Squarelink('2b7f274f2a8972dfa320', networkName)
         const provider = await sqlk.getProvider()
         return provider
+      case 'mewconnect':
+        if (window.connectMew) return window.connectMew
+        const connect = new MewConnect.Provider({ windowClosedError: true, infuraId: '7d06294ad2bd432887eada360c5e1986' })
+        window.connectMew = connect.makeWeb3Provider(networkName)
+        window.connectMew.sendAsync = new Proxy(window.connectMew.sendAsync, {
+          apply(target, thisArg, argumentsList) {
+            if (argumentsList.length >= 1) {
+              if (!argumentsList[0].id && typeof argumentsList === 'object') {
+                argumentsList[0].id = Date.now()
+              }
+            }
+            return target(...argumentsList)
+          }
+        })
+        return window.connectMew
       // case 'wallet-connect':
       //   await this.enableWalletConnectTxProvider()
       //   break
