@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
-import Web3 from 'web3'
 import Portis from '@portis/web3'
 import Squarelink from '@/node_modules/squarelink'
-import { toChecksumAddress, fromWei, isAddress, hexToNumberString } from 'web3-utils'
+import { toChecksumAddress, fromWei, isAddress } from 'web3-utils'
 import networkConfig from '@/networkConfig'
 let Authereum
 if (process.client) {
@@ -76,10 +75,6 @@ const getters = {
       default:
         return window.ethereum
     }
-  },
-  web3: (state, getters) => async () => {
-    const provider = await getters.getEthereumProvider()
-    return Object.freeze(new Web3(provider))
   }
 }
 
@@ -122,76 +117,54 @@ const actions = {
   onNetworkChanged({ commit }, { netId }) {
     commit('SET_NET_ID', netId)
   },
-  getBalance({ dispatch, state, getters }) {
-    const { rpcCallRetryAttempt } = getters.networkConfig
-    return new Promise((resolve, reject) => {
-      const checkBalance = async ({ retryAttempt = 1 }) => {
-        retryAttempt++
-        try {
-          const methodCallParams = {
-            method: 'eth_getBalance',
-            params: [state.ethAccount, 'latest']
-          }
+  async getBalance({ state, commit }) {
+    try {
+      const balance = await this.$provider.getBalance({ address: state.ethAccount })
+      commit('SET_BALANCE', balance)
 
-          const balance = await dispatch(
-            'metamask/sendAsync',
-            methodCallParams,
-            { root: true }
-          )
-          resolve(balance)
-        } catch (e) {
-          if (retryAttempt >= rpcCallRetryAttempt) {
-            reject(e)
-          } else {
-            checkBalance({ retryAttempt })
-          }
-        }
-      }
-      checkBalance({})
-    })
+      return balance
+    } catch (err) {
+      throw new Error(err.message)
+    }
   },
-  askPermission({ commit, dispatch, getters }, { providerName, networkName }) {
-    return new Promise(async (resolve, reject) => {
-      commit('SET_PROVIDER_NAME', providerName)
-      commit('SET_NETWORK_NAME', networkName)
-      const ethereum = await getters.getEthereumProvider()
-      try {
-        const ethAccounts = await ethereum.enable()
-        if (ethAccounts.length === 0) {
-          reject(new Error('lockedMetamask'))
-        }
-        const account = toChecksumAddress(ethAccounts[0])
-        commit('IDENTIFY', account)
-        dispatch('setAddress', { address: account })
-        let balance = await dispatch('getBalance')
-        balance = hexToNumberString(balance)
-        dispatch('saveUserBalance', { balance })
-        const netId = await dispatch('sendAsync', {
-          method: 'net_version',
-          params: [],
-          callbackAction: 'metamask/onNetworkChanged'
-        })
-        dispatch('onNetworkChanged', { netId })
-        if (ethereum.on) {
-          ethereum.on('accountsChanged', newAccount =>
-            onAccountsChanged({ dispatch, commit, newAccount })
-          )
-          ethereum.on('networkChanged', netId => dispatch('onNetworkChanged', { netId }))
-        }
-        dispatch('token/getTokenAddress', {}, { root: true })
-        dispatch('token/getTokenBalance', {}, { root: true })
-        resolve({ netId, ethAccount: ethAccounts[0] })
-      } catch (error) {
-        // User rejects approval from metamask
-        reject(error)
-      }
-    })
-  },
+  async askPermission({ commit, dispatch, getters }, { providerName, networkName }) {
+    commit('SET_PROVIDER_NAME', providerName)
+    commit('SET_NETWORK_NAME', networkName)
 
-  saveUserBalance({ commit }, { balance }) {
-    commit('SET_BALANCE', balance)
-  },
+    try {
+      const provider = await getters.getEthereumProvider()
+      const address = await this.$provider.initProvider(provider)
 
+      commit('IDENTIFY', address)
+      dispatch('setAddress', { address })
+
+      const netId = await this.$provider.checkNetworkVersion()
+      dispatch('onNetworkChanged', { netId })
+
+      await dispatch('getBalance')
+
+      this.$provider.on({
+        method: 'networkChanged',
+        callback: () => {
+          dispatch('onNetworkChanged', { netId })
+        }
+      })
+
+      this.$provider.on({
+        method: 'accountsChanged',
+        callback: (newAccount) => {
+          onAccountsChanged({ dispatch, commit, newAccount })
+        }
+      })
+
+      dispatch('token/getTokenAddress', {}, { root: true })
+      dispatch('token/getTokenBalance', {}, { root: true })
+
+      return { netId, ethAccount: address }
+    } catch (err) {
+      throw new Error(err.message)
+    }
+  },
   async fetchGasPrice({ rootState, commit, dispatch, rootGetters, state }, { oracleIndex = 0 }) {
     // eslint-disable-next-line prettier/prettier
     const { smartContractPollTime, gasPrice, gasOracleUrls } = rootGetters['metamask/networkConfig']
@@ -229,46 +202,6 @@ const actions = {
       oracleIndex++
       setTimeout(() => dispatch('fetchGasPrice', { oracleIndex }), 1000 * smartContractPollTime)
     }
-  },
-
-  sendAsync({ state, getters }, { method, from, params }) {
-    switch (getters.netId) {
-      case 77:
-      case 99:
-      case 100:
-        from = undefined
-        break
-    }
-    return new Promise(async (resolve, reject) => {
-      const provider = await getters.getEthereumProvider()
-      if (from) {
-        from = toChecksumAddress(from)
-      }
-      console.log('from!!!', from, provider.selectedAddress)
-      console.log('sendAsync `method, from, params`', method, from, params)
-      if (provider.request) {
-        if (params[0]) {
-          if (params[0].from) {
-            params[0].from = params[0].from.toLowerCase()
-          }
-        }
-      }
-      provider.sendAsync({
-        method,
-        params,
-        jsonrpc: '2.0',
-        from
-      }, (err, response) => {
-        if (err) {
-          reject(err)
-        }
-        if (response.error) {
-          reject(response.error)
-        } else {
-          resolve(response.result)
-        }
-      })
-    })
   }
 }
 

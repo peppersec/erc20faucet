@@ -11,16 +11,7 @@ const state = () => {
   }
 }
 
-const getters = {
-  tokenInstance: (state, getters, rootState, rootGetters) => async () => {
-    const { ethAccount, netId } = rootState.metamask
-    const { verifyingContract } = networkConfig[`netId${netId}`]
-    const web3 = await rootGetters['metamask/web3']()
-    return new web3.eth.Contract(ABI, verifyingContract, {
-      from: ethAccount
-    })
-  }
-}
+const getters = {}
 
 const mutations = {
   SET_TOKEN_ADDRESS(state, address) {
@@ -35,55 +26,81 @@ const mutations = {
 }
 
 const actions = {
-  async getTokenBalance({ state, getters, rootState, dispatch, commit }) {
-    const { ethAccount } = rootState.metamask
-    const tokenInstance = await getters.tokenInstance()
-    const data = tokenInstance.methods.balanceOf(ethAccount).encodeABI()
-    const callParams = {
-      method: 'eth_call',
-      params: [{
-        from: ethAccount,
-        to: tokenInstance._address,
-        data
-      }, 'latest'],
-      from: ethAccount
+  async getTokenBalance({ rootState, commit }) {
+    try {
+      const { ethAccount, netId } = rootState.metamask
+      const { verifyingContract } = networkConfig[`netId${netId}`]
+
+      const tokenInstance = new this.$provider.web3.eth.Contract(ABI, verifyingContract, {
+        from: ethAccount
+      })
+
+      const data = tokenInstance.methods.balanceOf(ethAccount).encodeABI()
+
+      const callParams = {
+        method: 'eth_call',
+        params: [{
+          from: ethAccount,
+          to: tokenInstance._address,
+          data
+        }, 'latest']
+      }
+
+      const balance = await this.$provider.sendRequest(callParams)
+
+      commit('SET_TOKEN_BALANCE', hexToNumberString(balance))
+    } catch (err) {
+      throw new Error(err.message)
     }
-    console.log('getTokenBalance callParams', callParams)
-    let balance = await dispatch('metamask/sendAsync', callParams, { root: true })
-    balance = hexToNumberString(balance)
-    commit('SET_TOKEN_BALANCE', balance)
-    setTimeout(() => { dispatch('getTokenBalance') }, 3000)
   },
 
-  async getTokenAddress({ state, getters, commit }) {
-    const tokenInstance = await getters.tokenInstance()
-    commit('SET_TOKEN_ADDRESS', tokenInstance._address)
+  getTokenAddress({ rootState, commit }) {
+    try {
+      const { ethAccount, netId } = rootState.metamask
+      const { verifyingContract } = networkConfig[`netId${netId}`]
+
+      const tokenInstance = new this.$provider.web3.eth.Contract(ABI, verifyingContract, {
+        from: ethAccount
+      })
+
+      commit('SET_TOKEN_ADDRESS', tokenInstance._address)
+    } catch (err) {
+      throw new Error(err.message)
+    }
   },
 
   async mintTokens({ state, getters, rootState, rootGetters, dispatch, commit }, { to, amount }) {
-    amount = amount.toString()
-    const gasPrice = rootState.metamask.gasPrice.standard
-    const tokenInstance = await getters.tokenInstance()
-    const { ethAccount } = rootState.metamask
-    const data = tokenInstance.methods.mint(to, toWei(amount)).encodeABI()
-    const gas = await tokenInstance.methods.mint(to, toWei(amount)).estimateGas()
-    console.log('gas mintTokens', gas)
-    const callParams = {
-      method: 'eth_sendTransaction',
-      params: [{
-        from: ethAccount,
-        to: tokenInstance._address,
-        gas: numberToHex(gas + 100000),
-        gasPrice: toHex(toWei(gasPrice.toString(), 'gwei')),
-        value: 0,
-        data
-      }],
-      from: ethAccount
-    }
+    try {
+      amount = amount.toString()
+      const gasPrice = rootState.metamask.gasPrice.standard
 
-    console.log('mintTokens callParams', callParams)
-    const txHash = await dispatch('metamask/sendAsync', callParams, { root: true })
-    commit('ADD_TX', txHash)
+      const { ethAccount, netId } = rootState.metamask
+      const { verifyingContract } = networkConfig[`netId${netId}`]
+
+      const tokenInstance = new this.$provider.web3.eth.Contract(ABI, verifyingContract, {
+        from: ethAccount
+      })
+
+      const data = tokenInstance.methods.mint(to, toWei(amount)).encodeABI()
+      const gas = await tokenInstance.methods.mint(to, toWei(amount)).estimateGas()
+
+      const callParams = {
+        method: 'eth_sendTransaction',
+        params: [{
+          from: ethAccount,
+          to: tokenInstance._address,
+          gas: numberToHex(gas + 100000),
+          gasPrice: toHex(toWei(gasPrice.toString(), 'gwei')),
+          value: 0,
+          data
+        }]
+      }
+
+      const txHash = await this.$provider.sendRequest(callParams)
+      commit('ADD_TX', txHash)
+    } catch (err) {
+      throw new Error(err.message)
+    }
   }
 }
 
