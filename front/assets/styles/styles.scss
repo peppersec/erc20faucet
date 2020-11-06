@@ -289,6 +289,10 @@ form {
     &.is-squarelink:before {
       background-image: url('../img/squarelink.svg');
     }
+
+    &.is-mewconnect:before {
+      background-image: url('../img/mewconnect.svg');
+    }
   }
 
   .control-with-select {

@@ -19,6 +19,12 @@
           <NetworkSelect v-model="portisNetwork" />
         </div>
         <div class="control control-with-select">
+          <button class="button is-small is-dark is-mewconnect" @click="_web3Connect('mewconnect', mewconnectNetwork)">
+            Mewconnect
+          </button>
+          <NetworkSelect v-model="mewconnectNetwork" />
+        </div>
+        <div class="control control-with-select">
           <button class="button is-small is-dark is-authereum" @click="_web3Connect('authereum', authereumNetwork)">
             Authereum
           </button>
@@ -58,6 +64,7 @@ export default {
       loading: false,
       message: 'Loading...',
       portisNetwork: 'mainnet',
+      mewconnectNetwork: 'mainnet',
       squarelinkNetwork: 'mainnet',
       authereumNetwork: 'mainnet'
     }
