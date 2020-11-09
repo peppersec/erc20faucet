@@ -124,7 +124,7 @@ export default {
   modules,
 
   providers: {
-    rpcUrl: process.env.INFURA_ID
+    rpcUrl: 'https://mainnet.infura.io/v3/c7463beadf2144e68646ff049917b716'
   },
 
   env: {
