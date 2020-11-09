@@ -62,7 +62,7 @@ const getters = {
         return provider
       case 'mewconnect':
         if (window.connectMew) return window.connectMew
-        const connect = new MewConnect.Provider({ windowClosedError: true, infuraId: 'c7463beadf2144e68646ff049917b716' })
+        const connect = new MewConnect.Provider({ windowClosedError: true, infuraId: process.env.infuraId })
         window.connectMew = connect.makeWeb3Provider(networkName)
         window.connectMew.sendAsync = new Proxy(window.connectMew.sendAsync, {
           apply(target, thisArg, argumentsList) {
