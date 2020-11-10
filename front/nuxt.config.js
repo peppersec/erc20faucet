@@ -21,8 +21,8 @@ export default {
   mode: 'spa',
   render: { resourceHints: false },
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   hooks: {
     'generate:page': (page) => {
       page.html = modifyHtml(page.html)
@@ -39,7 +39,12 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'An ERC20 token faucet on the Ethereum mainnet, and Ropsten, Kovan, Rinkeby and Görli testnets.' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'An ERC20 token faucet on the Ethereum mainnet, and Ropsten, Kovan, Rinkeby and Görli testnets.'
+      },
       {
         hid: 'og:title',
         property: 'og:title',
@@ -48,8 +53,7 @@ export default {
       {
         hid: 'og:description',
         property: 'og:description',
-        content:
-          'Get free ERC20 token on any Ethereum network'
+        content: 'Get free ERC20 token on any Ethereum network'
       },
       {
         hid: 'og:url',
@@ -69,8 +73,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content:
-          'Get free ERC20 token on any Ethereum network'
+        content: 'Get free ERC20 token on any Ethereum network'
       },
       {
         hid: 'keywords',
@@ -85,18 +88,20 @@ export default {
       { rel: 'apple-touch-icon', href: 'apple-touch-icon-180x180.png' },
       {
         rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css?family=Montserrat:400,600,700'
+        href: 'https://fonts.googleapis.com/css?family=Montserrat:400,600,700'
       }
     ],
-    script: [{
-      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', async: ''
-    }]
+    script: [
+      {
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+        async: ''
+      }
+    ]
   },
 
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: { color: '#fff' },
 
   // ...routerBase,
@@ -105,22 +110,18 @@ export default {
   // },
 
   /*
-  ** Global CSS
-  */
-  css: [
-    '@/assets/styles/styles.scss'
-  ],
+   ** Global CSS
+   */
+  css: ['@/assets/styles/styles.scss'],
 
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    { src: '~/plugins/ads.js', ssr: false }
-  ],
+   ** Plugins to load before mounting the App
+   */
+  plugins: [{ src: '~/plugins/ads.js', ssr: false }],
 
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules,
 
   providers: {
@@ -132,12 +133,12 @@ export default {
   },
 
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
