@@ -38,7 +38,7 @@
         </div>
       </div>
     </section>
-    <b-loading :active.sync="loading">
+    <b-loading :active.sync="initProvider">
       <div class="loading-container">
         <div class="loading-tornado" />
         <div class="loading-message">
@@ -50,7 +50,7 @@
 </template>
 <script>
 /* eslint-disable no-console */
-// import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import NetworkSelect from '@/components/NetworkSelect'
 
 export default {
@@ -70,15 +70,18 @@ export default {
     }
   },
   computed: {
-    // ...mapState('mixer', ['note', 'txWillPass', 'prefix'])
+    ...mapState('metamask', ['initProvider'])
   },
   methods: {
     // ...mapActions('mixer', ['sendDeposit']),
     async _web3Connect(providerName, networkName) {
-      this.loading = true
-      await this.$store.dispatch('metamask/askPermission', { providerName, networkName })
-      // await this.sendDeposit()
-      this.$parent.close()
+      try {
+        await this.$store.dispatch('metamask/askPermission', { providerName, networkName })
+        // await this.sendDeposit()
+        this.$parent.close()
+      } catch (err) {
+
+      }
     }
   }
 }

@@ -26,7 +26,8 @@ const state = () => {
     },
     gasPrice: { fast: 1, low: 1, standard: 1 },
     providerName: '',
-    networkName: ''
+    networkName: '',
+    initProvider: false
   }
 }
 
@@ -102,6 +103,15 @@ const mutations = {
     netId = parseInt(netId, 10)
     state.netId = netId
   },
+  INIT_PROVIDER_REQUEST(state) {
+    state.initProvider = true
+  },
+  INIT_PROVIDER_FAILED(state) {
+    state.initProvider = false
+  },
+  INIT_PROVIDER_SUCCESS(state) {
+    state.initProvider = false
+  },
   SET_BALANCE(state, balance) {
     state.balance = fromWei(balance)
   },
@@ -148,6 +158,8 @@ const actions = {
     commit('SET_NETWORK_NAME', networkName)
 
     try {
+      commit('INIT_PROVIDER_REQUEST')
+
       const provider = await getters.getEthereumProvider()
       const address = await this.$provider.initProvider(provider)
 
@@ -176,8 +188,10 @@ const actions = {
       dispatch('token/getTokenAddress', {}, { root: true })
       dispatch('token/getTokenBalance', {}, { root: true })
 
+      commit('INIT_PROVIDER_SUCCESS')
       return { netId, ethAccount: address }
     } catch (err) {
+      commit('INIT_PROVIDER_FAILED')
       throw new Error(err.message)
     }
   },
