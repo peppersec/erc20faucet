@@ -19,6 +19,12 @@
           <NetworkSelect v-model="portisNetwork" />
         </div>
         <div class="control control-with-select">
+          <button class="button is-small is-dark is-mewconnect" @click="_web3Connect('mewconnect', mewconnectNetwork)">
+            Mewconnect
+          </button>
+          <NetworkSelect v-model="mewconnectNetwork" />
+        </div>
+        <div class="control control-with-select">
           <button class="button is-small is-dark is-authereum" @click="_web3Connect('authereum', authereumNetwork)">
             Authereum
           </button>
@@ -32,7 +38,7 @@
         </div>
       </div>
     </section>
-    <b-loading :active.sync="loading">
+    <b-loading :active.sync="initProvider">
       <div class="loading-container">
         <div class="loading-tornado" />
         <div class="loading-message">
@@ -44,7 +50,7 @@
 </template>
 <script>
 /* eslint-disable no-console */
-// import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import NetworkSelect from '@/components/NetworkSelect'
 
 export default {
@@ -58,20 +64,24 @@ export default {
       loading: false,
       message: 'Loading...',
       portisNetwork: 'mainnet',
+      mewconnectNetwork: 'mainnet',
       squarelinkNetwork: 'mainnet',
       authereumNetwork: 'mainnet'
     }
   },
   computed: {
-    // ...mapState('mixer', ['note', 'txWillPass', 'prefix'])
+    ...mapState('metamask', ['initProvider'])
   },
   methods: {
     // ...mapActions('mixer', ['sendDeposit']),
     async _web3Connect(providerName, networkName) {
-      this.loading = true
-      await this.$store.dispatch('metamask/askPermission', { providerName, networkName })
-      // await this.sendDeposit()
-      this.$parent.close()
+      try {
+        await this.$store.dispatch('metamask/askPermission', { providerName, networkName })
+        // await this.sendDeposit()
+        this.$parent.close()
+      } catch (err) {
+
+      }
     }
   }
 }

@@ -5,7 +5,8 @@ const modifyHtml = (html) => {
 
 const modules = [
   ['nuxt-buefy', { css: false, materialDesignIcons: false }],
-  ['nuxt-validate', { events: '' }]
+  ['nuxt-validate', { events: '' }],
+  '@nuxtjs/provider'
 ]
 if (process.env.NODE_ENV !== 'development') {
   modules.push([
@@ -121,6 +122,14 @@ export default {
   ** Nuxt.js modules
   */
   modules,
+
+  providers: {
+    rpcUrl: 'https://mainnet.infura.io/v3/c7463beadf2144e68646ff049917b716'
+  },
+
+  env: {
+    infuraId: process.env.INFURA_ID
+  },
 
   /*
   ** Build configuration
