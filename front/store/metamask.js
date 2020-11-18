@@ -193,7 +193,6 @@ const actions = {
       commit('INIT_PROVIDER_SUCCESS')
       return { netId, ethAccount: address }
     } catch (err) {
-      console.log('err', err)
       commit('INIT_PROVIDER_FAILED')
       throw new Error(err.message)
     }
