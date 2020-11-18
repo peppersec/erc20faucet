@@ -169,10 +169,12 @@ const actions = {
       const netId = await this.$provider.checkNetworkVersion()
       dispatch('onNetworkChanged', { netId })
 
+      this.$provider.initWeb3(networkConfig[`netId${netId}`].rpcUrl)
+
       await dispatch('getBalance')
 
       this.$provider.on({
-        method: 'networkChanged',
+        method: 'chainChanged',
         callback: () => {
           dispatch('onNetworkChanged', { netId })
         }
@@ -191,6 +193,7 @@ const actions = {
       commit('INIT_PROVIDER_SUCCESS')
       return { netId, ethAccount: address }
     } catch (err) {
+      console.log('err', err)
       commit('INIT_PROVIDER_FAILED')
       throw new Error(err.message)
     }

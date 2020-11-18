@@ -1259,13 +1259,6 @@
   dependencies:
     vue-analytics "^5.16.2"
 
-"@nuxtjs/provider@https://github.com/tornadocash/provider.git":
-  version "0.0.2"
-  resolved "https://github.com/tornadocash/provider.git#fd15df068d9f28a39dbe136bd0cc0b35358be907"
-  dependencies:
-    web3 "^1.3.0"
-    web3-utils "^1.3.0"
-
 "@nuxtjs/youch@^4.2.3":
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/@nuxtjs/youch/-/youch-4.2.3.tgz#36f8b22df5a0efaa81373109851e1d857aca6bed"
@@ -9569,6 +9562,14 @@ nuxt-validate@^0.1.2:
   integrity sha512-dYtyjSYfcLc+irwLR3RiF6cwDG5dK2tfgE+Jz6k5tiXrm6+v5XxJCHW6RPQEPO7QZtDG+MGmLIuu+Lrrk4jChw==
   dependencies:
     vee-validate "^2.1.2"
+
+nuxt-web3-provider@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/nuxt-web3-provider/-/nuxt-web3-provider-0.1.1.tgz#8311b21444cf07e9f460c5ea4468c126c067e402"
+  integrity sha512-okYZwF0EsG5ukfYYCyFImnGQOCYvZLKKj2lUJfNaRbfcTR8KTbhxKBpuNtYA7V0ZJMdSQ3qbJ8ZQW64IoM9soA==
+  dependencies:
+    web3 "^1.3.0"
+    web3-utils "^1.3.0"
 
 nuxt@^2.6.3:
   version "2.6.3"

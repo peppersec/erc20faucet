@@ -6,7 +6,7 @@ const modifyHtml = (html) => {
 const modules = [
   ['nuxt-buefy', { css: false, materialDesignIcons: false }],
   ['nuxt-validate', { events: '' }],
-  '@nuxtjs/provider'
+  'nuxt-web3-provider'
 ]
 if (process.env.NODE_ENV !== 'development') {
   modules.push([
