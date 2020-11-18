@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+require('dotenv').config()
 const modifyHtml = (html) => {
   return html.replace(/data-n-head=""|data-n-head="true"/g, '')
 }
@@ -129,7 +130,7 @@ export default {
   },
 
   env: {
-    infuraId: process.env.INFURA_ID
+    infuraId: process.env.INFURA_ID || 'c7463beadf2144e68646ff049917b716'
   },
 
   /*

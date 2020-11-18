@@ -184,6 +184,8 @@ export default {
   },
   mounted() {
     window.onload = () => {
+      // eslint-disable-next-line no-console
+      console.log('process', process)
       this.$store.dispatch('metamask/fetchGasPrice', {})
     }
   },
