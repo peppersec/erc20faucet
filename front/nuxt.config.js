@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+require('dotenv').config()
 const modifyHtml = (html) => {
   return html.replace(/data-n-head=""|data-n-head="true"/g, '')
 }
@@ -6,7 +7,7 @@ const modifyHtml = (html) => {
 const modules = [
   ['nuxt-buefy', { css: false, materialDesignIcons: false }],
   ['nuxt-validate', { events: '' }],
-  '@nuxtjs/provider'
+  'nuxt-web3-provider'
 ]
 if (process.env.NODE_ENV !== 'development') {
   modules.push([
@@ -129,7 +130,7 @@ export default {
   },
 
   env: {
-    infuraId: process.env.INFURA_ID
+    infuraId: process.env.INFURA_ID || 'c7463beadf2144e68646ff049917b716'
   },
 
   /*
