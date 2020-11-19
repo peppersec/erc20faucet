@@ -7,7 +7,7 @@ const networkConfig = {
       tx: 'https://etherscan.io'
     },
     networkName: 'Mainnet',
-    rpcUrl: 'https://mainnet.infura.io/v3/c7463beadf2144e68646ff049917b716',
+    rpcUrl: `https://mainnet.infura.io/v3/${process.env.infuraId}`,
     gasPrice: { fast: 21, low: 1, standard: 5 },
     gasOracleUrls: [
       'https://www.etherchain.org/api/gasPriceOracle',
@@ -23,7 +23,7 @@ const networkConfig = {
       tx: 'https://ropsten.etherscan.io'
     },
     networkName: 'Ropsten',
-    rpcUrl: 'https://ropsten.infura.io/v3/c7463beadf2144e68646ff049917b716',
+    rpcUrl: `https://ropsten.infura.io/v3/${process.env.infuraId}`,
     gasPrice: { fast: 1, low: 1, standard: 1 },
     smartContractPollTime: 15
   },
@@ -37,7 +37,7 @@ const networkConfig = {
       tx: 'https://rinkeby.etherscan.io'
     },
     networkName: 'Rinkeby',
-    rpcUrl: 'https://rinkeby.infura.io/v3/c7463beadf2144e68646ff049917b716'
+    rpcUrl: `https://rinkeby.infura.io/v3/${process.env.infuraId}`
   },
   netId5: {
     verifyingContract: '0xBA62BCfcAaFc6622853cca2BE6Ac7d845BC0f2Dc',
@@ -49,7 +49,7 @@ const networkConfig = {
       tx: 'https://goerli.etherscan.io'
     },
     networkName: 'Goerli',
-    rpcUrl: 'https://goerli.infura.io/v3/c7463beadf2144e68646ff049917b716'
+    rpcUrl: `https://goerli.infura.io/v3/${process.env.infuraId}`
   },
   netId42: {
     verifyingContract: '0xfab46e002bbf0b4509813474841e0716e6730136',
@@ -61,7 +61,7 @@ const networkConfig = {
       tx: 'https://kovan.etherscan.io'
     },
     networkName: 'Kovan',
-    rpcUrl: 'https://kovan.infura.io/v3/c7463beadf2144e68646ff049917b716'
+    rpcUrl: `https://kovan.infura.io/v3/${process.env.infuraId}`
   },
   netId99: {
     verifyingContract: '0x8dc4f704a5fdf9f09ed561381bd02187201a83b8',
