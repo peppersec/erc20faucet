@@ -169,8 +169,7 @@ const actions = {
       const netId = await this.$provider.checkNetworkVersion()
       dispatch('onNetworkChanged', { netId })
 
-      const url = networkConfig[`netId${netId}`].rpcUrl.split('v3/')[0]
-      this.$provider.initWeb3(`${url}v3/${process.env.infuraId}`)
+      this.$provider.initWeb3(networkConfig[`netId${netId}`].rpcUrl)
 
       await dispatch('getBalance')
 
