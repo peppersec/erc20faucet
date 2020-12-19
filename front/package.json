@@ -28,7 +28,6 @@
     "nuxt-web3-provider": "0.1.1",
     "push-dir": "^0.4.1",
     "remove-html-comments": "^1.0.2",
-    "squarelink": "^1.0.6",
     "web3": "1.0.0-beta.36"
   },
   "devDependencies": {

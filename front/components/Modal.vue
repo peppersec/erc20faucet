@@ -19,33 +19,26 @@
           <NetworkSelect v-model="portisNetwork" />
         </div>
         <div class="control control-with-select">
-          <button class="button is-small is-dark is-mewconnect" @click="_web3Connect('mewconnect', mewconnectNetwork)">
+          <button
+            class="button is-small is-dark is-mewconnect"
+            @click="_web3Connect('mewconnect', mewconnectNetwork)"
+          >
             Mewconnect
           </button>
           <NetworkSelect v-model="mewconnectNetwork" />
         </div>
         <div class="control control-with-select">
-          <button class="button is-small is-dark is-authereum" @click="_web3Connect('authereum', authereumNetwork)">
+          <button
+            class="button is-small is-dark is-authereum"
+            @click="_web3Connect('authereum', authereumNetwork)"
+          >
             Authereum
           </button>
           <NetworkSelect v-model="authereumNetwork" />
         </div>
-        <div class="control control-with-select">
-          <button class="button is-small is-dark is-squarelink" @click="_web3Connect('squarelink', squarelinkNetwork)">
-            Squarelink
-          </button>
-          <NetworkSelect v-model="squarelinkNetwork" />
-        </div>
       </div>
     </section>
-    <b-loading :active.sync="initProvider">
-      <div class="loading-container">
-        <div class="loading-tornado" />
-        <div class="loading-message">
-          {{ message }}...
-        </div>
-      </div>
-    </b-loading>
+    <b-loading :active.sync="initProvider" />
   </div>
 </template>
 <script>
@@ -62,10 +55,8 @@ export default {
       isBackuped: false,
       preparingModal: null,
       loading: false,
-      message: 'Loading...',
       portisNetwork: 'mainnet',
       mewconnectNetwork: 'mainnet',
-      squarelinkNetwork: 'mainnet',
       authereumNetwork: 'mainnet'
     }
   },
@@ -73,14 +64,12 @@ export default {
     ...mapState('metamask', ['initProvider'])
   },
   methods: {
-    // ...mapActions('mixer', ['sendDeposit']),
     async _web3Connect(providerName, networkName) {
       try {
         await this.$store.dispatch('metamask/askPermission', { providerName, networkName })
-        // await this.sendDeposit()
         this.$parent.close()
       } catch (err) {
-
+        console.error('web3Connect Error', err.message)
       }
     }
   }
