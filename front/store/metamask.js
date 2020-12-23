@@ -158,11 +158,9 @@ const actions = {
     commit('SET_NETWORK_NAME', networkName)
 
     try {
-      console.log('start') // todo remove dev item
       commit('INIT_PROVIDER_REQUEST')
 
       const provider = await getters.getEthereumProvider()
-
       const address = await this.$provider.initProvider(provider)
 
       commit('IDENTIFY', address)
@@ -195,7 +193,6 @@ const actions = {
       commit('INIT_PROVIDER_SUCCESS')
       return { netId, ethAccount: address }
     } catch (err) {
-      console.log(err) // todo remove dev item
       commit('INIT_PROVIDER_FAILED')
       throw new Error(err.message)
     }
