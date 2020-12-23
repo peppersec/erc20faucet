@@ -130,7 +130,7 @@ export default {
   },
 
   env: {
-    infuraId: process.env.INFURA_ID || 'c7463beadf2144e68646ff049917b716'
+    infuraId: process.env.INFURA_ID || '859569f6decc4446a5da1bb680e7e9cf'
   },
 
   /*
