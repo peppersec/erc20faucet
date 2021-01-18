@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import Portis from '@portis/web3'
 import MewConnect from '@myetherwallet/mewconnect-web-client'
+import WalletConnectProvider from '@walletconnect/web3-provider'
 import { toChecksumAddress, fromWei, isAddress } from 'web3-utils'
 import networkConfig from '@/networkConfig'
 let Authereum
@@ -71,9 +72,13 @@ const getters = {
           }
         })
         return window.connectMew
-      // case 'wallet-connect':
-      //   await this.enableWalletConnectTxProvider()
-      //   break
+      case 'walletconnect':
+        const walletconnect = new WalletConnectProvider({
+          infuraId: process.env.infuraId
+        })
+
+        return walletconnect
+
       // case 'torus':
       //   await this.enableTorusTxProvider()
       //   break
@@ -148,15 +153,21 @@ const actions = {
       throw new Error(err.message)
     }
   },
-  async askPermission({ commit, dispatch, getters }, { providerName, networkName }) {
+  async askPermission({ commit, dispatch, getters }, { providerName, networkName, version }) {
     commit('SET_PROVIDER_NAME', providerName)
     commit('SET_NETWORK_NAME', networkName)
 
     try {
       commit('INIT_PROVIDER_REQUEST')
 
-      const provider = getters.getEthereumProvider
-      const address = await this.$provider.initProvider(provider)
+      const provider = await getters.getEthereumProvider
+      let address
+
+      if (version) {
+        address = await this.$provider.initProvider(provider, { version })
+      } else {
+        address = await this.$provider.initProvider(provider)
+      }
 
       commit('IDENTIFY', address)
       dispatch('setAddress', { address })
