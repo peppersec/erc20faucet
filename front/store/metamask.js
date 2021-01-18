@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import Portis from '@portis/web3'
-import Squarelink from '@/node_modules/squarelink'
 import MewConnect from '@myetherwallet/mewconnect-web-client'
 import { toChecksumAddress, fromWei, isAddress } from 'web3-utils'
 import networkConfig from '@/networkConfig'
@@ -44,7 +43,7 @@ const getters = {
   networkConfig(state) {
     return networkConfig[`netId${state.netId}`]
   },
-  getEthereumProvider: state => async () => {
+  getEthereumProvider: (state) => {
     const { providerName, networkName } = state
     switch (providerName) {
       case 'portis':
@@ -57,10 +56,6 @@ const getters = {
       case 'authereum':
         const authereum = new Authereum(networkName)
         return authereum.getProvider()
-      case 'squarelink':
-        const sqlk = new Squarelink('2b7f274f2a8972dfa320', networkName)
-        const provider = await sqlk.getProvider()
-        return provider
       case 'mewconnect':
         if (window.connectMew) return window.connectMew
         const connect = new MewConnect.Provider({ windowClosedError: true, infuraId: process.env.infuraId })
@@ -160,7 +155,7 @@ const actions = {
     try {
       commit('INIT_PROVIDER_REQUEST')
 
-      const provider = await getters.getEthereumProvider()
+      const provider = getters.getEthereumProvider
       const address = await this.$provider.initProvider(provider)
 
       commit('IDENTIFY', address)
