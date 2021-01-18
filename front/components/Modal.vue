@@ -36,6 +36,14 @@
           </button>
           <NetworkSelect v-model="authereumNetwork" />
         </div>
+        <div class="control">
+          <button
+            class="button is-small is-dark is-walletconnect"
+            @click="_web3Connect('walletconnect', 'mainnet', 'old')"
+          >
+            WalletConnect
+          </button>
+        </div>
       </div>
     </section>
     <b-loading :active.sync="initProvider" />
@@ -64,9 +72,9 @@ export default {
     ...mapState('metamask', ['initProvider'])
   },
   methods: {
-    async _web3Connect(providerName, networkName) {
+    async _web3Connect(providerName, networkName, version) {
       try {
-        await this.$store.dispatch('metamask/askPermission', { providerName, networkName })
+        await this.$store.dispatch('metamask/askPermission', { providerName, networkName, version })
         this.$parent.close()
       } catch (err) {
         console.error('web3Connect Error', err.message)
