@@ -1188,10 +1188,10 @@
     "@ethersproject/properties" "^5.0.3"
     "@ethersproject/strings" "^5.0.4"
 
-"@myetherwallet/mewconnect-web-client@^2.1.9":
-  version "2.1.11"
-  resolved "https://registry.npmjs.org/@myetherwallet/mewconnect-web-client/-/mewconnect-web-client-2.1.11.tgz#0abefcb5ba5e6cfdee4f582a1260db186dcc6350"
-  integrity sha512-4GQh+HoSbk+xrcndsBce9DCK2Sw8icY7LKuxHJI0SwTLfHV53CH9S91WhybYP8ez+Jtpbiq0tHuZ144dQcSnIw==
+"@myetherwallet/mewconnect-web-client@^2.1.18-beta.1":
+  version "2.1.18-beta.1"
+  resolved "https://registry.yarnpkg.com/@myetherwallet/mewconnect-web-client/-/mewconnect-web-client-2.1.18-beta.1.tgz#0d63e15bf7c55a6325d88d1a7fbeeef87bad6373"
+  integrity sha512-dYWcd7nByK6/p8Z0uAUwpBlMrkPNjyvhzsy/AiuyuQhjvPpEuGEiifXgjwFA6AftMOV958cvODH99yuiyk0edw==
   dependencies:
     bignumber.js "^9.0.0"
     browser-or-node "^1.2.1"
