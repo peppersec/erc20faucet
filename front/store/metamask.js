@@ -161,13 +161,7 @@ const actions = {
       commit('INIT_PROVIDER_REQUEST')
 
       const provider = await getters.getEthereumProvider
-      let address
-
-      if (version) {
-        address = await this.$provider.initProvider(provider, { version })
-      } else {
-        address = await this.$provider.initProvider(provider)
-      }
+      const address = await this.$provider.initProvider(provider, { version })
 
       commit('IDENTIFY', address)
       dispatch('setAddress', { address })
