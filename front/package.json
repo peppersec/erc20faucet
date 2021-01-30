@@ -13,7 +13,7 @@
     "deploy-prod": "echo erc20faucet.com > static/CNAME && nuxt generate && push-dir --remote origin --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
-    "@myetherwallet/mewconnect-web-client": "^2.1.18-beta.1",
+    "@myetherwallet/mewconnect-web-client": "^2.1.22",
     "@nuxtjs/google-analytics": "^2.2.0",
     "@portis/web3": "^2.0.0-beta.38",
     "@walletconnect/web3-provider": "^1.3.3",
