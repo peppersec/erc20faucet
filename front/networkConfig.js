@@ -9,10 +9,7 @@ const networkConfig = {
     networkName: 'Mainnet',
     rpcUrl: `https://mainnet.infura.io/v3/${process.env.infuraId}`,
     gasPrice: { fast: 21, low: 1, standard: 5 },
-    gasOracleUrls: [
-      'https://www.etherchain.org/api/gasPriceOracle',
-      'https://gasprice.poa.network/'
-    ],
+    gasOracleUrls: ['https://www.etherchain.org/api/gasPriceOracle', 'https://gasprice.poa.network/'],
     smartContractPollTime: 15
   },
   netId3: {
@@ -109,6 +106,18 @@ const networkConfig = {
     networkName: 'BNB Smart Chain',
     rpcUrl: 'https://bsc-dataseed1.binance.org',
     gasPrice: { fast: 20, low: 20, standard: 20 },
+    smartContractPollTime: 15
+  },
+  netId43114: {
+    verifyingContract: '0xb816d2Bd3FFEf8CA2E65E5F7E0695351b733C4f3',
+    rpcCallRetryAttempt: 10,
+    currencyName: 'AVAX',
+    explorerUrl: {
+      tx: 'https://cchain.explorer.avax.network'
+    },
+    networkName: 'Avalanche C Chain',
+    rpcUrl: 'https://api.avax.network/ext/bc/C/rpc',
+    gasPrice: { fast: 470, low: 470, standard: 470 },
     smartContractPollTime: 15
   }
 }

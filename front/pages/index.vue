@@ -11,7 +11,7 @@
       <div class="fields">
         <b-field
           label="Address"
-          :type="{'is-danger': errors.has('address')}"
+          :type="{ 'is-danger': errors.has('address') }"
           :message="errors.first('address')"
           class="field-height"
         >
@@ -26,7 +26,7 @@
 
         <b-field
           label="Amount"
-          :type="{'is-danger': errors.has('amount')}"
+          :type="{ 'is-danger': errors.has('amount') }"
           :message="errors.first('amount')"
           class="field-height"
         >
@@ -50,11 +50,7 @@
           >
             Mint Free Tokens
           </button>
-          <button
-            v-else
-            class="button is-primary"
-            @click.prevent="onConnectWeb3"
-          >
+          <button v-else class="button is-primary" @click.prevent="onConnectWeb3">
             Connect
           </button>
           <a href="https://peppersec.com" target="_blank" class="is-flex">
@@ -76,17 +72,13 @@
           <p class="heading">
             Balance
           </p>
-          <p class="title">
-            {{ balance }} {{ currency }}
-          </p>
+          <p class="title">{{ balance }} {{ currency }}</p>
         </div>
         <div class="column">
           <p class="heading">
             Token Balance
           </p>
-          <p class="title">
-            {{ tokenBalance }} FAU
-          </p>
+          <p class="title">{{ tokenBalance }} FAU</p>
         </div>
         <div class="column is-12">
           <p class="heading">
@@ -113,11 +105,7 @@
             Sent transactions
           </p>
           <b-field class="explorer" grouped group-multiline>
-            <p
-              v-for="(tx, index) in txs"
-              :key="index"
-              class="control"
-            >
+            <p v-for="(tx, index) in txs" :key="index" class="control">
               <a :href="makeUrl(tx)" target="_blank">
                 {{ makeUrl(tx) }}
               </a>
@@ -178,14 +166,10 @@ export default {
   },
   created() {
     this.$validator.extend('valid_address', {
-      getMessage: field => `The ${field} must be valid.`,
+      // eslint-disable-next-line arrow-parens
+      getMessage: (field) => `The ${field} must be valid.`,
       validate: () => !!this.isAddressValid
     })
-  },
-  mounted() {
-    window.onload = () => {
-      this.$store.dispatch('metamask/fetchGasPrice', {})
-    }
   },
   methods: {
     ...mapActions('token', ['mintTokens']),

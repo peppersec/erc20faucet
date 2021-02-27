@@ -166,7 +166,13 @@ const actions = {
       commit('IDENTIFY', address)
       dispatch('setAddress', { address })
 
-      const netId = await this.$provider.checkNetworkVersion()
+      // const netId = await this.$provider.checkNetworkVersion()
+      let netId = await this.$provider.sendRequest({
+        method: 'eth_chainId',
+        params: []
+      })
+      netId = Number(netId)
+      console.log('netId', netId)
       dispatch('onNetworkChanged', { netId })
 
       this.$provider.initWeb3(networkConfig[`netId${netId}`].rpcUrl)
@@ -191,6 +197,7 @@ const actions = {
       dispatch('token/getTokenBalance', {}, { root: true })
 
       commit('INIT_PROVIDER_SUCCESS')
+      dispatch('fetchGasPrice', {})
       return { netId, ethAccount: address }
     } catch (err) {
       commit('INIT_PROVIDER_FAILED')
@@ -201,6 +208,7 @@ const actions = {
     // eslint-disable-next-line prettier/prettier
     const { smartContractPollTime, gasPrice, gasOracleUrls } = rootGetters['metamask/networkConfig']
     const { netId } = rootState.metamask
+    console.log('netId', netId)
     try {
       if (netId === 1) {
         const response = await fetch(gasOracleUrls[oracleIndex % gasOracleUrls.length])
@@ -226,6 +234,7 @@ const actions = {
         }
         setTimeout(() => dispatch('fetchGasPrice', {}), 1000 * smartContractPollTime)
       } else {
+        console.log('gasPrice', gasPrice)
         commit('SAVE_GAS_PRICE', gasPrice)
       }
     } catch (e) {
