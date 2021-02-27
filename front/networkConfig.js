@@ -119,6 +119,18 @@ const networkConfig = {
     rpcUrl: 'https://api.avax.network/ext/bc/C/rpc',
     gasPrice: { fast: 470, low: 470, standard: 470 },
     smartContractPollTime: 15
+  },
+  netId250: {
+    verifyingContract: '0x5CD5Bb3EC13CE31771b63632Ddc2EB36E300b96C',
+    rpcCallRetryAttempt: 10,
+    currencyName: 'FTM',
+    explorerUrl: {
+      tx: 'https://ftmscan.com/'
+    },
+    networkName: 'Fantom Opera',
+    rpcUrl: 'https://rpcapi.fantom.network',
+    gasPrice: { fast: 22, low: 22, standard: 22 },
+    smartContractPollTime: 15
   }
 }
 
