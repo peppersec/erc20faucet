@@ -131,6 +131,18 @@ const networkConfig = {
     rpcUrl: 'https://rpcapi.fantom.network',
     gasPrice: { fast: 22, low: 22, standard: 22 },
     smartContractPollTime: 15
+  },
+  netId137: {
+    verifyingContract: '0xb816d2Bd3FFEf8CA2E65E5F7E0695351b733C4f3',
+    rpcCallRetryAttempt: 10,
+    currencyName: 'MATIC',
+    explorerUrl: {
+      tx: 'https://explorer-mainnet.maticvigil.com/'
+    },
+    networkName: 'Polygon(Matic) Network',
+    rpcUrl: 'https://rpc-mainnet.maticvigil.com/',
+    gasPrice: { fast: 1, low: 1, standard: 1 },
+    smartContractPollTime: 15
   }
 }
 
