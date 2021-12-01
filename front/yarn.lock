@@ -1188,6 +1188,27 @@
     "@ethersproject/properties" "^5.0.3"
     "@ethersproject/strings" "^5.0.4"
 
+"@findeth/abi@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@findeth/abi/-/abi-0.7.1.tgz#60d0801cb252e587dc3228f00c00581bb748aebc"
+  integrity sha512-9uNu+/UxeuIibxIB7slf7BGG2PWjgBZr+rKzohhLb7VuoZjmlCcKZkenqwErROxkPdsap7OGO/o1DuYMvObMvw==
+
+"@mycrypto/eth-scan@3.5.2":
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@mycrypto/eth-scan/-/eth-scan-3.5.2.tgz#5dd558b06a2a3d3a0d6d799f28b895b3b772fede"
+  integrity sha512-gHTeK2inci6220bSac8oOy35CPz7bkxJyuv9fBUuQBi/ekBL2yupcf36L7nrzTiBXCMHveKwWC34m592Z1qWJw==
+  dependencies:
+    "@findeth/abi" "^0.7.1"
+    isomorphic-unfetch "^3.1.0"
+    uuid-random-es "^2.1.1"
+
+"@mycrypto/gas-estimation@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@mycrypto/gas-estimation/-/gas-estimation-1.1.0.tgz#3f7af47aa487a6eb5d324db5ee11a66845c20c1e"
+  integrity sha512-/riP5G6DYp3uQBhC9vpWqbK+g6Uebs7AYjaivRF6V581h+PoObh0LqIZuKSzWZ5M+zPCxrrZHO43yR/jtpdq1w==
+  dependencies:
+    "@mycrypto/eth-scan" "3.5.2"
+
 "@myetherwallet/mewconnect-web-client@^2.1.22":
   version "2.1.22"
   resolved "https://registry.npmjs.org/@myetherwallet/mewconnect-web-client/-/mewconnect-web-client-2.1.22.tgz#8d4e97f0b8157c33f282d9cf650a9630da47a91e"
@@ -2727,6 +2748,13 @@ axios@^0.18.0:
   dependencies:
     follow-redirects "1.5.10"
     is-buffer "^2.0.2"
+
+axios@^0.21.2:
+  version "0.21.4"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
+  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
+  dependencies:
+    follow-redirects "^1.14.0"
 
 babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -7296,6 +7324,11 @@ follow-redirects@1.5.10:
   dependencies:
     debug "=3.1.0"
 
+follow-redirects@^1.14.0:
+  version "1.14.5"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.5.tgz#f09a5848981d3c772b5392309778523f8d85c381"
+  integrity sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==
+
 for-each@^0.3.3, for-each@~0.3.3:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/for-each/-/for-each-0.3.3.tgz#69b447e88a0a5d32c3e7084f3f1710034b21376e"
@@ -7493,6 +7526,14 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
+
+gas-price-oracle@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/gas-price-oracle/-/gas-price-oracle-0.4.4.tgz#9b7e5583ed7126a68f9d230b9efbd9d75d864bad"
+  integrity sha512-alAHLiZmPJ+GxKvujZZzEY8NRPqgGGHmDQUPFTa6HAMFB4LR/T6ShTDbqQzsdeWLPSw/j8/Gux0ZSC2AsPK+Hg==
+  dependencies:
+    axios "^0.21.2"
+    bignumber.js "^9.0.0"
 
 gauge@~2.7.3:
   version "2.7.4"
@@ -9059,6 +9100,14 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+
+isomorphic-unfetch@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/isomorphic-unfetch/-/isomorphic-unfetch-3.1.0.tgz#87341d5f4f7b63843d468438128cb087b7c3e98f"
+  integrity sha512-geDJjpoZ8N0kWexiwkX8F9NkTsXhetLPVbZFQ+JTW239QNOwvB0gniuR1Wc6f0AMTn7/mFGyXvHTifrCp/GH8Q==
+  dependencies:
+    node-fetch "^2.6.1"
+    unfetch "^4.2.0"
 
 isomorphic-ws@^4.0.1:
   version "4.0.1"
@@ -15376,6 +15425,11 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+
+uuid-random-es@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/uuid-random-es/-/uuid-random-es-2.1.1.tgz#695bbe28559d9886afdb079dd4713f3faa1651a6"
+  integrity sha512-JUGIsQZb+1O1ETxY4/p/S0rsFGPGgscECbzPXN+Xeqnlz3XmqMR3OzC64bMQ8htxDFjvuA8Gl9y3Ve/l8fQEWg==
 
 uuid@2.0.1:
   version "2.0.1"

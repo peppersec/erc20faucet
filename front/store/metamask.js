@@ -24,7 +24,6 @@ const state = () => {
       value: null,
       valid: false
     },
-    gasPrice: { fast: 1, low: 1, standard: 1 },
     providerName: '',
     networkName: '',
     initProvider: false
@@ -121,9 +120,6 @@ const mutations = {
       valid
     }
   },
-  SAVE_GAS_PRICE(state, gasPrice) {
-    state.gasPrice = gasPrice
-  },
   SET_PROVIDER_NAME(state, providerName) {
     state.providerName = providerName
   },
@@ -174,6 +170,7 @@ const actions = {
       netId = Number(netId)
       console.log('netId', netId)
       dispatch('onNetworkChanged', { netId })
+      dispatch('gasPrice/gasWatcher', {}, { root: true })
 
       this.$provider.initWeb3(networkConfig[`netId${netId}`].rpcUrl)
 
@@ -197,51 +194,10 @@ const actions = {
       dispatch('token/getTokenBalance', {}, { root: true })
 
       commit('INIT_PROVIDER_SUCCESS')
-      dispatch('fetchGasPrice', {})
       return { netId, ethAccount: address }
     } catch (err) {
       commit('INIT_PROVIDER_FAILED')
       throw new Error(err.message)
-    }
-  },
-  async fetchGasPrice({ rootState, commit, dispatch, rootGetters, state }, { oracleIndex = 0 }) {
-    // eslint-disable-next-line prettier/prettier
-    const { smartContractPollTime, gasPrice, gasOracleUrls } = rootGetters['metamask/networkConfig']
-    const { netId } = rootState.metamask
-    console.log('netId', netId)
-    try {
-      if (netId === 1) {
-        const response = await fetch(gasOracleUrls[oracleIndex % gasOracleUrls.length])
-        if (response.status === 200) {
-          const json = await response.json()
-
-          const gasPrices = { ...gasPrice }
-          if (json.slow) {
-            gasPrices.low = Number(json.slow) + 0.5
-          }
-          if (json.safeLow) {
-            gasPrices.low = Number(json.safeLow) + 0.5
-          }
-          if (json.fast) {
-            gasPrices.fast = Number(json.fast)
-          }
-          if (json.standard) {
-            gasPrices.standard = Number(json.standard)
-          }
-          commit('SAVE_GAS_PRICE', gasPrices)
-        } else {
-          throw Error('Fetch gasPrice failed')
-        }
-        setTimeout(() => dispatch('fetchGasPrice', {}), 1000 * smartContractPollTime)
-      } else {
-        console.log('gasPrice', gasPrice)
-        commit('SAVE_GAS_PRICE', gasPrice)
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
-      oracleIndex++
-      setTimeout(() => dispatch('fetchGasPrice', { oracleIndex }), 1000 * smartContractPollTime)
     }
   }
 }

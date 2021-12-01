@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { fromWei, toHex, toWei, numberToHex, hexToNumberString } from 'web3-utils'
+import { fromWei, toWei, numberToHex, hexToNumberString } from 'web3-utils'
 import ABI from '@/abis/ERC20.abi.json'
 import networkConfig from '@/networkConfig'
 
@@ -40,9 +40,9 @@ const actions = {
       const callParams = {
         method: 'eth_call',
         params: [{
+          data,
           from: ethAccount,
-          to: tokenInstance._address,
-          data
+          to: tokenInstance._address
         }, 'latest']
       }
 
@@ -69,10 +69,12 @@ const actions = {
     }
   },
 
-  async mintTokens({ state, getters, rootState, rootGetters, dispatch, commit }, { to, amount }) {
+  async mintTokens({ state, getters, rootState, rootGetters, dispatch, commit }, { to, amount, gasParams }) {
     try {
       amount = amount.toString()
-      const gasPrice = rootState.metamask.gasPrice.standard
+      if (!gasParams) {
+        gasParams = rootState.gasPrice.gasParams
+      }
 
       const { ethAccount, netId } = rootState.metamask
       const { verifyingContract } = networkConfig[`netId${netId}`]
@@ -87,19 +89,25 @@ const actions = {
       const callParams = {
         method: 'eth_sendTransaction',
         params: [{
+          data,
+          value: '0x0',
           from: ethAccount,
           to: tokenInstance._address,
           gas: numberToHex(gas + 100000),
-          gasPrice: toHex(toWei(gasPrice.toString(), 'gwei')),
-          value: 0,
-          data
+          ...gasParams
         }]
       }
 
       const txHash = await this.$provider.sendRequest(callParams)
       commit('ADD_TX', txHash)
     } catch (err) {
-      throw new Error(err.message)
+      if (err.message.includes('EIP-1559')) {
+        const gasPrice = await dispatch('gasPrice/fetchGasPrice', {}, { root: true })
+
+        await dispatch('mintTokens', { to, amount, gasParams: { gasPrice } })
+      } else {
+        throw new Error(err.message)
+      }
     }
   }
 }

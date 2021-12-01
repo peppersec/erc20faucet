@@ -29,7 +29,9 @@
     "nuxt-web3-provider": "0.1.2",
     "push-dir": "^0.4.1",
     "remove-html-comments": "^1.0.2",
-    "web3": "1.0.0-beta.36"
+    "web3": "1.0.0-beta.36",
+    "@mycrypto/gas-estimation": "^1.1.0",
+    "gas-price-oracle": "^0.4.4"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

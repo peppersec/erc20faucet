@@ -72,13 +72,17 @@
           <p class="heading">
             Balance
           </p>
-          <p class="title">{{ balance }} {{ currency }}</p>
+          <p class="title">
+            {{ balance }} {{ currency }}
+          </p>
         </div>
         <div class="column">
           <p class="heading">
             Token Balance
           </p>
-          <p class="title">{{ tokenBalance }} FAU</p>
+          <p class="title">
+            {{ tokenBalance }} FAU
+          </p>
         </div>
         <div class="column is-12">
           <p class="heading">
@@ -120,6 +124,7 @@
 <script>
 import Modal from '@/components/Modal'
 import { mapState, mapGetters, mapActions } from 'vuex'
+import { errorParser } from '../utils'
 
 export default {
   data() {
@@ -175,11 +180,11 @@ export default {
     ...mapActions('token', ['mintTokens']),
     makeUrl(txHash) {
       const config = this.$store.getters['metamask/networkConfig']
-      return `${config.explorerUrl.tx}/tx/${txHash}`
+      return `${config.explorerUrl.tx}/${txHash}`
     },
     addressUrl(address) {
       const config = this.$store.getters['metamask/networkConfig']
-      return `${config.explorerUrl.tx}/address/${address}`
+      return `${config.explorerUrl.address}/${address}`
     },
     onConnectWeb3() {
       this.$modal.open({
@@ -189,9 +194,10 @@ export default {
         width: 440
       })
     },
-    validateBeforeSubmit() {
-      this.clicked = true
-      this.$validator.validateAll().then(async (result) => {
+    async validateBeforeSubmit() {
+      try {
+        this.clicked = true
+        const result = await this.$validator.validateAll()
         if (result) {
           await this.mintTokens({ to: this.address, amount: this.amount })
           this.$toast.open({
@@ -199,7 +205,6 @@ export default {
             type: 'is-success',
             position: 'is-top'
           })
-          this.clicked = false
           return
         }
         this.$toast.open({
@@ -207,8 +212,15 @@ export default {
           type: 'is-danger',
           position: 'is-top'
         })
+      } catch (err) {
+        this.$toast.open({
+          message: errorParser(err.message),
+          type: 'is-danger',
+          position: 'is-top'
+        })
+      } finally {
         this.clicked = false
-      })
+      }
     }
   }
 }
