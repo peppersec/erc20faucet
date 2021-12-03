@@ -22,6 +22,9 @@ export default {
   target: 'static',
   ssr: false,
   render: { resourceHints: false },
+  generate: {
+    fallback: true
+  },
   /*
    ** Headers of the page
    */

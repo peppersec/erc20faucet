@@ -110,6 +110,11 @@ $radius-small: 4px;
 
     > section.main-content {
       flex: 1;
+
+      .is-centered-main-content & {
+        display: flex;
+        align-items: center;
+      }
     }
   }
 }

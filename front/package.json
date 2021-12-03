@@ -9,10 +9,10 @@
     "generate": "nuxt generate && gulp",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "deploy": "echo erc20faucet.com > static/CNAME && yarn generate && gh-pages -d dist -o origin",
-    "deploy-prod": "echo erc20faucet.com > static/CNAME && nuxt generate && push-dir --remote origin --dir=dist --branch=gh-pages --cleanup"
+    "deploy": "echo erc20faucet.com > static/CNAME && yarn generate && push-dir --remote origin --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
+    "@mycrypto/gas-estimation": "^1.1.0",
     "@myetherwallet/mewconnect-web-client": "^2.1.22",
     "@nuxtjs/google-analytics": "^2.2.0",
     "@portis/web3": "^2.0.0-beta.38",
@@ -20,7 +20,7 @@
     "authereum": "^0.0.4-beta.110",
     "cross-env": "^5.2.0",
     "dotenv": "8.2.0",
-    "gh-pages": "^2.0.1",
+    "gas-price-oracle": "^0.4.4",
     "gulp": "^4.0.2",
     "gulp-html-minifier": "^0.1.8",
     "nuxt": "2.14.7",
@@ -29,9 +29,7 @@
     "nuxt-web3-provider": "0.1.2",
     "push-dir": "^0.4.1",
     "remove-html-comments": "^1.0.2",
-    "web3": "1.0.0-beta.36",
-    "@mycrypto/gas-estimation": "^1.1.0",
-    "gas-price-oracle": "^0.4.4"
+    "web3": "1.0.0-beta.36"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",
