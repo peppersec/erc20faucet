@@ -334,6 +334,20 @@ const networkConfig = {
     gasPrice: { fast: 600, low: 499.9, custom: 500, standard: 499.9 },
     smartContractPollTime: 15,
     isEIP1559Supported: false
+  },
+  netId1284: {
+    verifyingContract: '0xC4fc619bBa4572656606bc7Fdc0874d481EBebDE',
+    rpcCallRetryAttempt: 10,
+    currencyName: 'GLMR',
+    explorerUrl: {
+      tx: 'https://blockscout.moonbeam.network/tx',
+      address: 'https://blockscout.moonbeam.network/address'
+    },
+    networkName: 'Moonbeam',
+    rpcUrl: 'https://rpc.api.moonbeam.network',
+    gasPrice: { fast: 100, low: 100, custom: 100, standard: 100 },
+    smartContractPollTime: 15,
+    isEIP1559Supported: false
   }
 }
 
