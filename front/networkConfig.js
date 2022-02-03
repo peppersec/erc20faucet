@@ -186,8 +186,8 @@ const networkConfig = {
     rpcCallRetryAttempt: 10,
     currencyName: 'MOVR',
     explorerUrl: {
-      tx: 'https://blockscout.moonriver.moonbeam.network/tx',
-      address: 'https://blockscout.moonriver.moonbeam.network/address'
+      tx: 'https://moonriver.moonscan.io/tx',
+      address: 'https://moonriver.moonscan.io/address'
     },
     networkName: 'Moonriver',
     rpcUrl: 'https://rpc.moonriver.moonbeam.network',
@@ -214,8 +214,8 @@ const networkConfig = {
     rpcCallRetryAttempt: 10,
     currencyName: 'ETH',
     explorerUrl: {
-      tx: 'https://testnet.arbiscan.io/tx',
-      address: 'https://testnet.arbiscan.io/address'
+      tx: 'https://rinkeby-explorer.arbitrum.io/tx',
+      address: 'https://rinkeby-explorer.arbitrum.io/address'
     },
     networkName: 'Arbitrum Testnet Rinkeby',
     rpcUrl: 'https://rinkeby.arbitrum.io/rpc',
@@ -270,8 +270,8 @@ const networkConfig = {
     rpcCallRetryAttempt: 10,
     currencyName: 'KCS',
     explorerUrl: {
-      tx: 'https://scan.kcc.io/tx',
-      address: 'https://scan.kcc.io/address'
+      tx: 'https://explorer.kcc.io/en/tx',
+      address: 'https://explorer.kcc.io/en/address'
     },
     networkName: 'KCC Mainnet',
     rpcUrl: 'https://rpc-mainnet.kcc.network',
@@ -340,8 +340,8 @@ const networkConfig = {
     rpcCallRetryAttempt: 10,
     currencyName: 'GLMR',
     explorerUrl: {
-      tx: 'https://blockscout.moonbeam.network/tx',
-      address: 'https://blockscout.moonbeam.network/address'
+      tx: 'https://moonbeam.moonscan.io/tx',
+      address: 'https://moonbeam.moonscan.io/address'
     },
     networkName: 'Moonbeam',
     rpcUrl: 'https://rpc.api.moonbeam.network',
