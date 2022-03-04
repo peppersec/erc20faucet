@@ -69,6 +69,20 @@ const networkConfig = {
     smartContractPollTime: 15,
     isEIP1559Supported: true
   },
+  netId10: {
+    verifyingContract: '0x5c239f4E539452f58A55E3d5Be1dC016b0809a19',
+    rpcCallRetryAttempt: 10,
+    currencyName: 'ETH',
+    explorerUrl: {
+      tx: 'https://optimistic.etherscan.io/tx',
+      address: 'https://optimistic.etherscan.io/address'
+    },
+    networkName: 'Optimism',
+    rpcUrl: `https://mainnet.optimism.io`,
+    gasPrice: { fast: 0.001, low: 0.001, standard: 0.001 },
+    smartContractPollTime: 15,
+    isEIP1559Supported: false
+  },
   netId99: {
     verifyingContract: '0x8dc4f704a5fdf9f09ed561381bd02187201a83b8',
     rpcCallRetryAttempt: 10,
@@ -91,7 +105,7 @@ const networkConfig = {
       tx: 'https://blockscout.com/xdai/mainnet/tx',
       address: 'https://blockscout.com/xdai/mainnet/address'
     },
-    networkName: 'xDai',
+    networkName: 'Gnosis Chain (formerly xDai)',
     rpcUrl: 'https://dai.poa.network',
     gasPrice: { fast: 1, low: 1, standard: 1 },
     smartContractPollTime: 15,
@@ -135,7 +149,7 @@ const networkConfig = {
     },
     networkName: 'Avalanche C Chain',
     rpcUrl: 'https://api.avax.network/ext/bc/C/rpc',
-    gasPrice: { fast: 470, low: 470, standard: 470 },
+    gasPrice: { fast: 35, low: 25, custom: 25, standard: 25 },
     smartContractPollTime: 15,
     isEIP1559Supported: false
   },
@@ -232,7 +246,7 @@ const networkConfig = {
       address: 'https://cronos.crypto.org/explorer/address'
     },
     networkName: 'Cronos',
-    rpcUrl: 'https://evm-cronos.crypto.org',
+    rpcUrl: 'https://evm.crypto.org',
     gasPrice: { fast: 6000, low: 4500, custom: 6000, standard: 4500 },
     smartContractPollTime: 15,
     isEIP1559Supported: false
