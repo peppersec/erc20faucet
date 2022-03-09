@@ -362,6 +362,20 @@ const networkConfig = {
     gasPrice: { fast: 100, low: 100, custom: 100, standard: 100 },
     smartContractPollTime: 15,
     isEIP1559Supported: false
+  },
+  netId1088: {
+    verifyingContract: '0x0C3f22c3AFc5D222c4f6B34Ef901D468B1866948',
+    rpcCallRetryAttempt: 10,
+    currencyName: 'Metis',
+    explorerUrl: {
+      tx: 'https://andromeda-explorer.metis.io/tx',
+      address: 'https://andromeda-explorer.metis.io/address'
+    },
+    networkName: 'Metis',
+    rpcUrl: 'https://andromeda.metis.io/?owner=1088',
+    gasPrice: { fast: 8, low: 8, custom: 8, standard: 8 },
+    smartContractPollTime: 15,
+    isEIP1559Supported: false
   }
 }
 
