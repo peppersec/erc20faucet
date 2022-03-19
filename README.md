@@ -1,6 +1,6 @@
 ![](https://raw.githubusercontent.com/peppersec/erc20faucet/master/front/static/ERC20%20Token%20Faucet.jpg)
 
-# ERC20 Token Faucet
+# Dyno Protocol Faucet
 
 An ERC20 token faucet on the Ethereum mainnet, and Ropsten, Kovan, Rinkeby and Görli testnets.
 

@@ -40,7 +40,7 @@ export default {
     htmlAttrs: {
       lang: 'en'
     },
-    title: 'ERC20 Token Faucet',
+    title: 'Dyno Protocol Faucet',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

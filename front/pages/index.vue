@@ -2,7 +2,7 @@
   <div class="columns">
     <div class="column is-two-thirds-tablet is-half-desktop">
       <h1 class="title">
-        Ethereum ERC20 Token Faucet
+        Ethereum Dyno Protocol Faucet
       </h1>
       <h2 class="subtitle">
         Mint tokens to an address
