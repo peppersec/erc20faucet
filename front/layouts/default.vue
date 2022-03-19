@@ -4,7 +4,7 @@
       <div class="container">
         <div class="navbar-brand">
           <a class="navbar-item text-hide logo" href="/">
-            ERC20 Token Faucet
+            Dyno Protocol Faucet
           </a>
         </div>
       </div>
