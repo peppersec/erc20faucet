@@ -19,6 +19,12 @@ const actions = {
     const TIME_OUT = 15
     const networkConfig = rootGetters['metamask/networkConfig']
 
+    console.log(323)
+
+    console.log(111)
+
+    console.log(5555)
+
     try {
       if (networkConfig.isEIP1559Supported) {
         const { maxFeePerGas, maxPriorityFeePerGas } = await estimateFees(networkConfig.rpcUrl)
