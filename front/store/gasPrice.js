@@ -21,9 +21,7 @@ const actions = {
 
     console.log(323)
 
-    console.log(111)
-
-    console.log(5555)
+    console.log(666)
 
     try {
       if (networkConfig.isEIP1559Supported) {
