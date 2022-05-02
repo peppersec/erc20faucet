@@ -386,7 +386,7 @@ const networkConfig = {
       address: 'https://aurorascan.dev/address'
     },
     networkName: 'Aurora',
-    rpcUrl: 'https://mainnet-rpc.thundercore.com',
+    rpcUrl: 'https://mainnet.aurora.dev',
     gasPrice: { fast: 0.5, low: 0.01, custom: 0.3, standard: 0.05 },
     smartContractPollTime: 15,
     isEIP1559Supported: false
