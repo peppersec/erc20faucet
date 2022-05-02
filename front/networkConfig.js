@@ -382,8 +382,8 @@ const networkConfig = {
     rpcCallRetryAttempt: 10,
     currencyName: 'ETH',
     explorerUrl: {
-      tx: 'https://aurorascan.dev/tx/',
-      address: 'https://aurorascan.dev/address/'
+      tx: 'https://aurorascan.dev/tx',
+      address: 'https://aurorascan.dev/address'
     },
     networkName: 'Aurora',
     rpcUrl: 'https://mainnet-rpc.thundercore.com',
@@ -396,8 +396,8 @@ const networkConfig = {
     rpcCallRetryAttempt: 10,
     currencyName: 'TT',
     explorerUrl: {
-      tx: 'https://scan.thundercore.com/transactions/',
-      address: 'https://scan.thundercore.com/address/'
+      tx: 'https://scan.thundercore.com/transactions',
+      address: 'https://scan.thundercore.com/address'
     },
     networkName: 'ThunderCore',
     rpcUrl: 'https://mainnet-rpc.thundercore.com',
