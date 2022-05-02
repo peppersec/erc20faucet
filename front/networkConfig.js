@@ -376,6 +376,34 @@ const networkConfig = {
     gasPrice: { fast: 8, low: 8, custom: 8, standard: 8 },
     smartContractPollTime: 15,
     isEIP1559Supported: false
+  },
+  netId1313161554: {
+    verifyingContract: '0xb94c3fC62B605B1C587EA5D53cc218eD9b5a6C1C',
+    rpcCallRetryAttempt: 10,
+    currencyName: 'ETH',
+    explorerUrl: {
+      tx: 'https://aurorascan.dev/tx',
+      address: 'https://aurorascan.dev/address'
+    },
+    networkName: 'Aurora',
+    rpcUrl: 'https://mainnet.aurora.dev',
+    gasPrice: { fast: 0.5, low: 0.01, custom: 0.3, standard: 0.05 },
+    smartContractPollTime: 15,
+    isEIP1559Supported: false
+  },
+  netId108: {
+    verifyingContract: '0x4e96Ae2DE48AB986B496942533E6aF3Ee9C275a5',
+    rpcCallRetryAttempt: 10,
+    currencyName: 'TT',
+    explorerUrl: {
+      tx: 'https://scan.thundercore.com/transactions',
+      address: 'https://scan.thundercore.com/address'
+    },
+    networkName: 'ThunderCore',
+    rpcUrl: 'https://mainnet-rpc.thundercore.com',
+    gasPrice: { fast: 20, low: 2, custom: 2, standard: 1 },
+    smartContractPollTime: 15,
+    isEIP1559Supported: false
   }
 }
 
