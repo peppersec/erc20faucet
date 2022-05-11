@@ -404,6 +404,20 @@ const networkConfig = {
     gasPrice: { fast: 20, low: 2, custom: 2, standard: 1 },
     smartContractPollTime: 15,
     isEIP1559Supported: false
+  },
+  netId79: {
+    verifyingContract: '0x601280b038d8663204D2E7869730D67d061665Fa',
+    rpcCallRetryAttempt: 15,
+    currencyName: 'ZENITH',
+    explorerUrl: {
+      tx: 'https://scan.zenithchain.co/tx',
+      address: 'https://scan.zenithchain.co/address'
+    },
+    networkName: 'Zenith Mainnet',
+    rpcUrl: 'https://dataserver-1.zenithchain.co',
+    gasPrice: { fast: 5, low: 1, custom: 2, standard: 1.5 },
+    smartContractPollTime: 15,
+    isEIP1559Supported: false
   }
 }
 
