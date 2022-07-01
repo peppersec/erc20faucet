@@ -176,7 +176,7 @@ const networkConfig = {
       address: 'https://polygonscan.com/address'
     },
     networkName: 'Polygon(Matic) Network',
-    rpcUrl: 'https://polygon-rpc.com/',
+    rpcUrl: 'https://rpc-mainnet.maticvigil.com',
     gasPrice: { fast: 1, low: 1, standard: 1 },
     smartContractPollTime: 15,
     isEIP1559Supported: false
