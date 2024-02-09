@@ -418,6 +418,20 @@ const networkConfig = {
     gasPrice: { fast: 5, low: 1, custom: 2, standard: 1.5 },
     smartContractPollTime: 15,
     isEIP1559Supported: false
+  },
+  netId11155111 :{
+    verifyingContract: '0x370DE27fdb7D1Ff1e1BaA7D11c5820a324Cf623C',
+    rpcCallRetryAttempt: 10,
+    currencyName: 'sETH',
+    explorerUrl: {
+      tx: 'https://sepolia.etherscan.io/tx',
+      address: 'https://sepolia.etherscan.io/address'
+    },
+    networkName: 'Sepolia',
+    rpcUrl: `https://sepolia.infura.io/v3/${process.env.infuraId}`,
+    gasPrice: { fast: 1, low: 1, standard: 1 },
+    smartContractPollTime: 15,
+    isEIP1559Supported: true
   }
 }
 
